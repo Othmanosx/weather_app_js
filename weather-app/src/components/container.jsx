@@ -63,6 +63,7 @@ export default class container extends Component {
             humidity.push(data["consolidated_weather"][i]["humidity"]);
             visibility.push(data["consolidated_weather"][i]["visibility"]);
             date.push(
+//               get days name by date
               days[
                 new Date(
                   data["consolidated_weather"][i]["applicable_date"]
