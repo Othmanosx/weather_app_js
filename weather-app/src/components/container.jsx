@@ -25,7 +25,7 @@ export default class container extends Component {
       parent: {},
     };
   }
-
+// first render
   componentDidMount() {
     fetch("https://www.metaweather.com/api/location/1979455/")
       .then((response) => response.json())
@@ -53,7 +53,7 @@ export default class container extends Component {
           let visibility = [];
           let predictability = [];
           let date = [];
-
+          // Split data in individual arrays of first rendering
           for (var i = 0; i < data["consolidated_weather"].length; i++) {
             min_temp.push(data["consolidated_weather"][i]["min_temp"]);
             max_temp.push(data["consolidated_weather"][i]["max_temp"]);
@@ -120,7 +120,7 @@ export default class container extends Component {
             let visibility = [];
             let predictability = [];
             let date = [];
-
+            // Split data in individual arrays of another  rendering
             for (var i = 0; i < data["consolidated_weather"].length; i++) {
               min_temp.push(data["consolidated_weather"][i]["min_temp"]);
               max_temp.push(data["consolidated_weather"][i]["max_temp"]);
