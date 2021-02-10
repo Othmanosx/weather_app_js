@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Chart from "./chart";
 import Info from "./info";
-import SearchBar from "./searchBar";
+import Table from "./table";
 import Today from "./today";
 
 export default class container extends Component {
@@ -25,7 +25,7 @@ export default class container extends Component {
       parent: {},
     };
   }
-// first render
+  // first render
   componentDidMount() {
     fetch("https://www.metaweather.com/api/location/1979455/")
       .then((response) => response.json())
@@ -63,11 +63,11 @@ export default class container extends Component {
             humidity.push(data["consolidated_weather"][i]["humidity"]);
             visibility.push(data["consolidated_weather"][i]["visibility"]);
             date.push(
-//               get days name by date
+              //               get days name by date
               days[
-                new Date(
-                  data["consolidated_weather"][i]["applicable_date"]
-                ).getDay()
+              new Date(
+                data["consolidated_weather"][i]["applicable_date"]
+              ).getDay()
               ]
             );
 
@@ -134,9 +134,9 @@ export default class container extends Component {
               visibility.push(data["consolidated_weather"][i]["visibility"]);
               date.push(
                 days[
-                  new Date(
-                    data["consolidated_weather"][i]["applicable_date"]
-                  ).getDay()
+                new Date(
+                  data["consolidated_weather"][i]["applicable_date"]
+                ).getDay()
                 ]
               );
 
@@ -172,7 +172,7 @@ export default class container extends Component {
     const getWoeid = () => {
       fetch(
         "https://www.metaweather.com/api/location/search/?query=" +
-          this.state.cityName
+        this.state.cityName
       )
         .then((response) => response.json())
         .then((data) => this.setState({ wo: data[0]["woeid"] }));
@@ -186,10 +186,10 @@ export default class container extends Component {
       <div>
         <input onChange={handelInput} type="text"></input>
         <input onClick={getWoeid} type="submit"></input>
-        <Info />
-        <SearchBar />
-        <Chart />
-        <Today />
+        <Today state={this.state} />
+        <Info state={this.state} />
+        <Table state={this.state} />
+        <Chart state={this.state} />
       </div>
     );
   }
