@@ -1,9 +1,11 @@
 import React from 'react'
 
-export default function more() {
+
+export default function more(props) {
     return (
         <div>
-            more informations about weather
+
+
         </div>
     )
 }

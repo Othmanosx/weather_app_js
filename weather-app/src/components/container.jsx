@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import Chart from "./chart";
 import Info from "./info";
-import SearchBar from "./searchBar";
+import TemChart from "./Charts/TemChart";
 import Today from "./today";
+import WindSpeed from "./Charts/WindSpeed";
+import Humidity from "./Charts/Humidity";
+import LineChart from "./Charts/LineChart";
 
 export default class container extends Component {
   constructor(props) {
@@ -11,7 +13,7 @@ export default class container extends Component {
     this.state = {
       wo: "1979455",
       isLoading: true,
-      data: [{ params: {} }],
+      data: [],
       cityName: "Baghdad",
       min_temp: [],
       max_temp: [],
@@ -23,9 +25,12 @@ export default class container extends Component {
       predictability: [],
       date: [],
       parent: {},
+      title: "",
+      sun_rise: "",
+      sun_set: "",
     };
   }
-// first render
+  // first render
   componentDidMount() {
     fetch("https://www.metaweather.com/api/location/1979455/")
       .then((response) => response.json())
@@ -63,7 +68,7 @@ export default class container extends Component {
             humidity.push(data["consolidated_weather"][i]["humidity"]);
             visibility.push(data["consolidated_weather"][i]["visibility"]);
             date.push(
-//               get days name by date
+              //               get days name by date
               days[
                 new Date(
                   data["consolidated_weather"][i]["applicable_date"]
@@ -86,8 +91,11 @@ export default class container extends Component {
             predictability: predictability,
             air_pressure: air_pressure,
             date: date,
-            data: data["consolidated_weather"],
+            data: data["consolidated_weather"][0],
             parent: data["parent"],
+            title: data["title"],
+            sun_rise: data["sun_rise"],
+            sun_set: data["sun_set"],
           });
         }
       });
@@ -155,8 +163,11 @@ export default class container extends Component {
               predictability: predictability,
               air_pressure: air_pressure,
               date: date,
-              data: data["consolidated_weather"],
+              data: data["consolidated_weather"][0],
               parent: data["parent"],
+              title: data["title"],
+              sun_rise: data["sun_rise"],
+              sun_set: data["sun_set"],
             });
           }
         });
@@ -164,10 +175,10 @@ export default class container extends Component {
   }
 
   render() {
-    console.log(this.state.max_temp);
+    // console.log(this.state.max_temp);
     const handelInput = (e) => {
       this.setState({ cityName: e.target.value });
-      console.log(e.target.value);
+      // console.log(e.target.value);
     };
     const getWoeid = () => {
       fetch(
@@ -177,7 +188,7 @@ export default class container extends Component {
         .then((response) => response.json())
         .then((data) => this.setState({ wo: data[0]["woeid"] }));
     };
-    console.log(this.state.data);
+    // console.log(this.state.data);
 
     if (this.state.isLoading) {
       return <>loading .........</>;
@@ -186,10 +197,22 @@ export default class container extends Component {
       <div>
         <input onChange={handelInput} type="text"></input>
         <input onClick={getWoeid} type="submit"></input>
-        <Info />
-        <SearchBar />
-        <Chart />
-        <Today />
+        <Today state={this.state} />
+        <Info state={this.state} />
+        <TemChart
+          date={this.state.date}
+          min_temp={this.state.min_temp}
+          max_temp={this.state.max_temp}
+          the_temp={this.state.the_temp}
+        />
+        <WindSpeed date={this.state.date} wind_speed={this.state.wind_speed} />
+        <LineChart
+          date={this.state.date}
+          air_pressure={this.state.air_pressure}
+          visibility={this.state.visibility}
+          predictability={this.state.predictability}
+        />
+        <Humidity date={this.state.date} humidity={this.state.humidity} />
       </div>
     );
   }
