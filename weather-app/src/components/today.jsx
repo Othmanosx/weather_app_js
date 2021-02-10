@@ -19,7 +19,7 @@ export default function today(props) {
                     </div>
                     <div class="temp">
                         <img src="https://s5.postimg.cc/yzcm7htyb/image.png" alt="" width="30" />
-                        {props.state.the_temp[0]}&deg;
+                        {Math.floor(props.state.the_temp[0])}&deg;
                 </div>
                 </div>
                 <div class="right-panel panel">
