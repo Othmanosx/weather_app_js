@@ -25,9 +25,9 @@ export default class container extends Component {
       predictability: [],
       date: [],
       parent: {},
-      title: "",
-      sun_rise: "",
-      sun_set: "",
+      title:'',
+      sun_rise:'',
+      sun_set:''
     };
   }
   // first render
@@ -93,9 +93,9 @@ export default class container extends Component {
             date: date,
             data: data["consolidated_weather"][0],
             parent: data["parent"],
-            title: data["title"],
-            sun_rise: data["sun_rise"],
-            sun_set: data["sun_set"],
+            title:data['title'],
+            sun_rise:data['sun_rise'],
+            sun_set:data['sun_set']
           });
         }
       });
@@ -165,9 +165,9 @@ export default class container extends Component {
               date: date,
               data: data["consolidated_weather"][0],
               parent: data["parent"],
-              title: data["title"],
-              sun_rise: data["sun_rise"],
-              sun_set: data["sun_set"],
+              title:data['title'],
+              sun_rise:data['sun_rise'],
+              sun_set:data['sun_set']
             });
           }
         });
