@@ -188,8 +188,8 @@ export default class container extends Component {
         <input onClick={getWoeid} type="submit"></input>
         <Today state={this.state} />
         <Info state={this.state} />
-        <Table state={this.state} />
         <Chart state={this.state} />
+        <Table state={this.state} />
       </div>
     );
   }
