@@ -11,7 +11,7 @@ export default class container extends Component {
     this.state = {
       wo: "1979455",
       isLoading: true,
-      data: [{ params: {} }],
+      data: [],
       cityName: "Baghdad",
       min_temp: [],
       max_temp: [],
@@ -23,6 +23,9 @@ export default class container extends Component {
       predictability: [],
       date: [],
       parent: {},
+      title:'',
+      sun_rise:'',
+      sun_set:''
     };
   }
   // first render
@@ -86,8 +89,11 @@ export default class container extends Component {
             predictability: predictability,
             air_pressure: air_pressure,
             date: date,
-            data: data["consolidated_weather"],
+            data: data["consolidated_weather"][0],
             parent: data["parent"],
+            title:data['title'],
+            sun_rise:data['sun_rise'],
+            sun_set:data['sun_set']
           });
         }
       });
@@ -155,8 +161,11 @@ export default class container extends Component {
               predictability: predictability,
               air_pressure: air_pressure,
               date: date,
-              data: data["consolidated_weather"],
+              data: data["consolidated_weather"][0],
               parent: data["parent"],
+              title:data['title'],
+              sun_rise:data['sun_rise'],
+              sun_set:data['sun_set']
             });
           }
         });
@@ -164,10 +173,10 @@ export default class container extends Component {
   }
 
   render() {
-    console.log(this.state.max_temp);
+    // console.log(this.state.max_temp);
     const handelInput = (e) => {
       this.setState({ cityName: e.target.value });
-      console.log(e.target.value);
+      // console.log(e.target.value);
     };
     const getWoeid = () => {
       fetch(
@@ -177,7 +186,7 @@ export default class container extends Component {
         .then((response) => response.json())
         .then((data) => this.setState({ wo: data[0]["woeid"] }));
     };
-    console.log(this.state.data);
+    // console.log(this.state.data);
 
     if (this.state.isLoading) {
       return <>loading .........</>;
