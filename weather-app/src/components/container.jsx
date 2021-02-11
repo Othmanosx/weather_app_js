@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import Chart from "./chart";
 import Info from "./info";
-import Table from "./table";
+import TemChart from "./Charts/TemChart";
 import Today from "./today";
 import snow from './wallpapers/snow.jpg'
 import sleet from './wallpapers/sleet.jpg'
@@ -13,6 +12,9 @@ import showers from './wallpapers/showers.jpg'
 import heavycloud from './wallpapers/heavycloud.jpg'
 import lightcould from './wallpapers/lightcloud.jpg'
 import clear from './wallpapers/clear.jpg'
+import WindSpeed from "./Charts/WindSpeed";
+import Humidity from "./Charts/Humidity";
+import LineChart from "./Charts/LineChart";
 
 export default class container extends Component {
   constructor(props) {
@@ -271,8 +273,20 @@ export default class container extends Component {
         <input onClick={getWoeid} type="submit"></input>
         <Today state={this.state} />
         <Info state={this.state} />
-        <Chart state={this.state} />
-        <Table state={this.state} />
+        <TemChart
+          date={this.state.date}
+          min_temp={this.state.min_temp}
+          max_temp={this.state.max_temp}
+          the_temp={this.state.the_temp}
+        />
+        <WindSpeed date={this.state.date} wind_speed={this.state.wind_speed} />
+        <LineChart
+          date={this.state.date}
+          air_pressure={this.state.air_pressure}
+          visibility={this.state.visibility}
+          predictability={this.state.predictability}
+        />
+        <Humidity date={this.state.date} humidity={this.state.humidity} />
       </div>
     );
   }

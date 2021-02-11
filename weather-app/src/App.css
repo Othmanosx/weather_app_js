@@ -34,3 +34,17 @@
     transform: rotate(360deg);
   }
 }
+
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 5vw);
+  grid-gap: 15px;
+}
+
+.gallery__img {
+  width: 10%;
+  height: 10%;
+  object-fit: cover;
+}
