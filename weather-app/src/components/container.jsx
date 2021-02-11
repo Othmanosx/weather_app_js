@@ -37,8 +37,7 @@ export default class container extends Component {
       parent: {},
       title: '',
       sun_rise: '',
-      sun_set: '',
-      wallpaper: snow
+      sun_set: ''
     };
   }
 
