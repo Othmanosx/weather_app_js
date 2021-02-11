@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import Info from "./info";
 import TemChart from "./Charts/TemChart";
 import Today from "./today";
-import snow from './wallpapers/snow.jpg'
-import sleet from './wallpapers/sleet.jpg'
-import hail from './wallpapers/hail.jpg'
-import thunderstorm from './wallpapers/thunderstorm.jpg'
-import heavyrain from './wallpapers/heavyrain.jpg'
-import lightrain from './wallpapers/lightrain.jpeg'
-import showers from './wallpapers/showers.jpg'
-import heavycloud from './wallpapers/heavycloud.jpg'
-import lightcould from './wallpapers/lightcloud.jpg'
-import clear from './wallpapers/clear.jpg'
+import sn from "./wallpapers/snow.jpg";
+import sl from "./wallpapers/sleet.jpg";
+import h from "./wallpapers/hail.jpg";
+import t from "./wallpapers/thunderstorm.jpg";
+import hr from "./wallpapers/heavyrain.jpg";
+import lr from "./wallpapers/lightrain.jpeg";
+import s from "./wallpapers/showers.jpg";
+import hc from "./wallpapers/heavycloud.jpg";
+import lc from "./wallpapers/lightcloud.jpg";
+import c from "./wallpapers/clear.jpg";
 import WindSpeed from "./Charts/WindSpeed";
 import Humidity from "./Charts/Humidity";
 import LineChart from "./Charts/LineChart";
@@ -21,6 +21,8 @@ export default class container extends Component {
     super(props);
 
     this.state = {
+      backGround: [sn, sl, h,t, h, hr, lr, s, hc, lc, c],
+      backGroundIndex: ['sn', 'sl', 'h','t', 'h', 'hr', 'lr', 's', 'hc', 'lc', 'c'],
       wo: "1979455",
       isLoading: true,
       data: [],
@@ -35,10 +37,9 @@ export default class container extends Component {
       predictability: [],
       date: [],
       parent: {},
-      title: '',
-      sun_rise: '',
-      sun_set: '',
-      wallpaper: snow
+      title: "",
+      sun_rise: "",
+      sun_set: "",
     };
   }
 
@@ -82,9 +83,9 @@ export default class container extends Component {
             date.push(
               //               get days name by date
               days[
-              new Date(
-                data["consolidated_weather"][i]["applicable_date"]
-              ).getDay()
+                new Date(
+                  data["consolidated_weather"][i]["applicable_date"]
+                ).getDay()
               ]
             );
 
@@ -105,13 +106,13 @@ export default class container extends Component {
             date: date,
             data: data["consolidated_weather"][0],
             parent: data["parent"],
-            title: data['title'],
-            sun_rise: data['sun_rise'],
-            sun_set: data['sun_set']
+            title: data["title"],
+            sun_rise: data["sun_rise"],
+            sun_set: data["sun_set"],
+            // data:data
           });
         }
       });
-
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -155,9 +156,9 @@ export default class container extends Component {
               visibility.push(data["consolidated_weather"][i]["visibility"]);
               date.push(
                 days[
-                new Date(
-                  data["consolidated_weather"][i]["applicable_date"]
-                ).getDay()
+                  new Date(
+                    data["consolidated_weather"][i]["applicable_date"]
+                  ).getDay()
                 ]
               );
 
@@ -178,74 +179,20 @@ export default class container extends Component {
               date: date,
               data: data["consolidated_weather"][0],
               parent: data["parent"],
-              title: data['title'],
-              sun_rise: data['sun_rise'],
-              sun_set: data['sun_set']
+              title: data["title"],
+              sun_rise: data["sun_rise"],
+              sun_set: data["sun_set"],
             });
           }
         });
     }
-
   }
 
-
   render() {
-    if (this.state.data.weather_state_name === "Snow") {
-      this.backgroundPhoto = snow
-    }
-    if (this.state.data.weather_state_name === "Sleet") {
-      this.backgroundPhoto = sleet
-    }
-    if (this.state.data.weather_state_name === "Hail") {
-      this.backgroundPhoto = hail
-    }
-    if (this.state.data.weather_state_name === "Thunderstorm") {
-      this.backgroundPhoto = thunderstorm
-    }
-    if (this.state.data.weather_state_name === "Heavy Rain") {
-      this.backgroundPhoto = heavyrain
-    }
-    if (this.state.data.weather_state_name === "Light Rain") {
-      this.backgroundPhoto = lightrain
-    }
-    if (this.state.data.weather_state_name === "Showers") {
-      this.backgroundPhoto = showers
-    }
-    if (this.state.data.weather_state_name === "Heavy Cloud") {
-      this.backgroundPhoto = heavycloud
-    }
-    if (this.state.data.weather_state_name === "Light Cloud") {
-      this.backgroundPhoto = lightcould
-    }
-    if (this.state.data.weather_state_name === "Clear") {
-      this.backgroundPhoto = clear
-    }
-
-    // switch (this.state.data.weather_state_name) {
-    //   case "Snow":
-    //     this.backgroundPhoto = snow
-    //   case "Sleet":
-    //     this.backgroundPhoto = sleet
-    //   case "Hail":
-    //     this.backgroundPhoto = hail
-    //   case "Thunderstorm":
-    //     this.backgroundPhoto = thunderstorm
-    //   case "Heavy Rain":
-    //     this.backgroundPhoto = heavyrain
-    //   case "Light Rain":
-    //     this.backgroundPhoto = lightrain
-    //   case "Showers":
-    //     this.backgroundPhoto = showers
-    //   case "Heavy Cloud":
-    //     this.backgroundPhoto = heavycloud
-    //   case "Light Cloud":
-    //     this.backgroundPhoto = lightcould
-    //   case "Clear":
-    //     this.backgroundPhoto = clear
-    //   default:
-    //     this.backgroundPhoto = clear
-    // }
-
+    this.backgroundPhoto = 
+    this.state.backGround[
+      this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
+    ];
 
     const handelInput = (e) => {
       this.setState({ cityName: e.target.value });
@@ -254,7 +201,7 @@ export default class container extends Component {
     const getWoeid = () => {
       fetch(
         "https://www.metaweather.com/api/location/search/?query=" +
-        this.state.cityName
+          this.state.cityName
       )
         .then((response) => response.json())
         .then((data) => this.setState({ wo: data[0]["woeid"] }));
@@ -265,10 +212,15 @@ export default class container extends Component {
       return <>loading .........</>;
     }
     return (
-      <div style={{
-        backgroundImage: `url(${this.backgroundPhoto})`, backgroundRepeat: "no-repeat",
-        backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed"
-      }}>
+      <div
+        style={{
+          backgroundImage: `url(${this.backgroundPhoto})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
         <input onChange={handelInput} type="text"></input>
         <input onClick={getWoeid} type="submit"></input>
         <Today state={this.state} />
