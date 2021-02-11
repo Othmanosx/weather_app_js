@@ -7,6 +7,7 @@ export default function LineChart(props) {
     if (props.air_pressure.length > 0) {
       document.querySelector(".LineChart").innerHTML = "";
       const ctx = document.createElement("canvas");
+      // ctx.style.backgroundColor = '#FDF5E6';
 
       new Chart(ctx, {
         type: "line",

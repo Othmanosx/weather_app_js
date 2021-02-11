@@ -7,6 +7,7 @@ export default function TemChart(props) {
     if (props.the_temp.length > 0) {
       document.querySelector(".TemChart").innerHTML = "";
       const ctx = document.createElement("canvas");
+      // ctx.style.backgroundColor = '#FDF5E6';
 
       new Chart(ctx, {
         type: "bar",

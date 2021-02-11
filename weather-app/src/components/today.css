@@ -2,9 +2,9 @@
 div.widget
 {
   position: relative;
-  width: 355px;
-  height: 125px;
-  margin: 150px auto;
+  width: 455px;
+  height: 200px;
+  margin: 50px auto;
   background-color: #9054f0;
   border-radius: 15px;
   padding: 25px;
@@ -47,5 +47,9 @@ div.right-panel
   float: right;
   top: 0;
   margin-top: 35px;
-  padding-left: 10px;
+  padding-left: 10%;
 }
+
+
+
+
