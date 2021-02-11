@@ -4,7 +4,6 @@ import Container from './components/container'
 function App() {
   return (
     <div className="App">
-      Weather app
       <Container />
     </div>
   );

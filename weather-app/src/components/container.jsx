@@ -3,6 +3,16 @@ import Chart from "./chart";
 import Info from "./info";
 import Table from "./table";
 import Today from "./today";
+import snow from './wallpapers/snow.jpg'
+import sleet from './wallpapers/sleet.jpg'
+import hail from './wallpapers/hail.jpg'
+import thunderstorm from './wallpapers/thunderstorm.jpg'
+import heavyrain from './wallpapers/heavyrain.jpg'
+import lightrain from './wallpapers/lightrain.jpeg'
+import showers from './wallpapers/showers.jpg'
+import heavycloud from './wallpapers/heavycloud.jpg'
+import lightcould from './wallpapers/lightcloud.jpg'
+import clear from './wallpapers/clear.jpg'
 
 export default class container extends Component {
   constructor(props) {
@@ -23,11 +33,13 @@ export default class container extends Component {
       predictability: [],
       date: [],
       parent: {},
-      title:'',
-      sun_rise:'',
-      sun_set:''
+      title: '',
+      sun_rise: '',
+      sun_set: '',
+      wallpaper: snow
     };
   }
+
   // first render
   componentDidMount() {
     fetch("https://www.metaweather.com/api/location/1979455/")
@@ -91,12 +103,13 @@ export default class container extends Component {
             date: date,
             data: data["consolidated_weather"][0],
             parent: data["parent"],
-            title:data['title'],
-            sun_rise:data['sun_rise'],
-            sun_set:data['sun_set']
+            title: data['title'],
+            sun_rise: data['sun_rise'],
+            sun_set: data['sun_set']
           });
         }
       });
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -163,17 +176,75 @@ export default class container extends Component {
               date: date,
               data: data["consolidated_weather"][0],
               parent: data["parent"],
-              title:data['title'],
-              sun_rise:data['sun_rise'],
-              sun_set:data['sun_set']
+              title: data['title'],
+              sun_rise: data['sun_rise'],
+              sun_set: data['sun_set']
             });
           }
         });
     }
+
   }
 
+
   render() {
-    // console.log(this.state.max_temp);
+    if (this.state.data.weather_state_name === "Snow") {
+      this.backgroundPhoto = snow
+    }
+    if (this.state.data.weather_state_name === "Sleet") {
+      this.backgroundPhoto = sleet
+    }
+    if (this.state.data.weather_state_name === "Hail") {
+      this.backgroundPhoto = hail
+    }
+    if (this.state.data.weather_state_name === "Thunderstorm") {
+      this.backgroundPhoto = thunderstorm
+    }
+    if (this.state.data.weather_state_name === "Heavy Rain") {
+      this.backgroundPhoto = heavyrain
+    }
+    if (this.state.data.weather_state_name === "Light Rain") {
+      this.backgroundPhoto = lightrain
+    }
+    if (this.state.data.weather_state_name === "Showers") {
+      this.backgroundPhoto = showers
+    }
+    if (this.state.data.weather_state_name === "Heavy Cloud") {
+      this.backgroundPhoto = heavycloud
+    }
+    if (this.state.data.weather_state_name === "Light Cloud") {
+      this.backgroundPhoto = lightcould
+    }
+    if (this.state.data.weather_state_name === "Clear") {
+      this.backgroundPhoto = clear
+    }
+
+    // switch (this.state.data.weather_state_name) {
+    //   case "Snow":
+    //     this.backgroundPhoto = snow
+    //   case "Sleet":
+    //     this.backgroundPhoto = sleet
+    //   case "Hail":
+    //     this.backgroundPhoto = hail
+    //   case "Thunderstorm":
+    //     this.backgroundPhoto = thunderstorm
+    //   case "Heavy Rain":
+    //     this.backgroundPhoto = heavyrain
+    //   case "Light Rain":
+    //     this.backgroundPhoto = lightrain
+    //   case "Showers":
+    //     this.backgroundPhoto = showers
+    //   case "Heavy Cloud":
+    //     this.backgroundPhoto = heavycloud
+    //   case "Light Cloud":
+    //     this.backgroundPhoto = lightcould
+    //   case "Clear":
+    //     this.backgroundPhoto = clear
+    //   default:
+    //     this.backgroundPhoto = clear
+    // }
+
+
     const handelInput = (e) => {
       this.setState({ cityName: e.target.value });
       // console.log(e.target.value);
@@ -192,7 +263,10 @@ export default class container extends Component {
       return <>loading .........</>;
     }
     return (
-      <div>
+      <div style={{
+        backgroundImage: `url(${this.backgroundPhoto})`, backgroundRepeat: "no-repeat",
+        backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed"
+      }}>
         <input onChange={handelInput} type="text"></input>
         <input onClick={getWoeid} type="submit"></input>
         <Today state={this.state} />
