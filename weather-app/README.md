@@ -2,7 +2,7 @@
 
 Weather  App using React js and base on this [API](https://www.metaweather.com/api/)  
 
-## Available Scripts
+### Used libraries:
 
 In the project directory, you can run:
 
