@@ -1,6 +1,6 @@
 # Weather App using React 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Weather  App using React js and base on this [API](https://www.metaweather.com/api/)  
 
 ## Available Scripts
 
