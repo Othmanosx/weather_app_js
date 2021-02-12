@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TemChart from "./Charts/TemChart";
 import Today from "./today";
+import './loading.css'
 import WindSpeed from "./Charts/WindSpeed";
 import Humidity from "./Charts/Humidity";
 import LineChart from "./Charts/LineChart";
@@ -208,7 +209,13 @@ export default class container extends Component {
     // console.log(this.state.data);
 
     if (this.state.isLoading) {
-      return <>loading .........</>;
+      return <><div class="icon sun-shower">
+        <div class="cloud"></div>
+        <div class="sun">
+          <div class="rays"></div>
+        </div>
+        <div class="rain"></div>
+      </div><h2 class='loading'>Loading...</h2></>;
     }
     return (
 
