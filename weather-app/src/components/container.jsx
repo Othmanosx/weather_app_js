@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import Info from "./info";
 import TemChart from "./Charts/TemChart";
 import Today from "./today";
-import sn from "./wallpapers/snow.jpg";
-import sl from "./wallpapers/sleet.jpg";
-import h from "./wallpapers/hail.jpg";
-import t from "./wallpapers/thunderstorm.jpg";
-import hr from "./wallpapers/heavyrain.jpg";
-import lr from "./wallpapers/lightrain.jpeg";
-import s from "./wallpapers/showers.jpg";
-import hc from "./wallpapers/heavycloud.jpg";
-import lc from "./wallpapers/lightcloud.jpg";
-import c from "./wallpapers/clear.jpg";
 import WindSpeed from "./Charts/WindSpeed";
 import Humidity from "./Charts/Humidity";
 import LineChart from "./Charts/LineChart";
+import "./search.css"
+import sn from "./videos/snow.mp4";
+import sl from "./videos/sleet.mp4";
+import h from "./videos/hail.mp4";
+import t from "./videos/thunderstorm.mp4";
+import hr from "./videos/heavyrain.mp4";
+import lr from "./videos/lightrain.mp4";
+import s from "./videos/showers.mp4";
+import hc from "./videos/heavycloud.mp4";
+import lc from "./videos/lightcloud.mp4";
+import c from "./videos/clear.mp4";
 
 export default class container extends Component {
   constructor(props) {
@@ -193,7 +193,6 @@ export default class container extends Component {
       this.state.backGround[
       this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
       ];
-
     const handelInput = (e) => {
       this.setState({ cityName: e.target.value });
       // console.log(e.target.value);
@@ -212,34 +211,54 @@ export default class container extends Component {
       return <>loading .........</>;
     }
     return (
-      <div
-        style={{
-          backgroundImage: `url(${this.backgroundPhoto})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
-      >
-        <input onChange={handelInput} type="text"></input>
-        <input onClick={getWoeid} type="submit"></input>
-        <Today state={this.state} />
-        <Info state={this.state} />
-        <TemChart
-          date={this.state.date}
-          min_temp={this.state.min_temp}
-          max_temp={this.state.max_temp}
-          the_temp={this.state.the_temp}
-        />
-        <WindSpeed date={this.state.date} wind_speed={this.state.wind_speed} />
-        <LineChart
-          date={this.state.date}
-          air_pressure={this.state.air_pressure}
-          visibility={this.state.visibility}
-          predictability={this.state.predictability}
-        />
-        <Humidity date={this.state.date} humidity={this.state.humidity} />
+
+      <div>
+        <video key={this.state.data.weather_state_abbr} id="background-video" loop autoPlay muted>
+          <source src={this.backgroundPhoto} type="video/mp4" />
+          <source src={this.backgroundPhoto} type="video/ogg" />
+                Your browser does not support the video tag.
+        </video>
+        <div className='main'>
+
+          <div className='left-glass-card'>
+            <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
+            <TemChart
+              date={this.state.date}
+              min_temp={this.state.min_temp}
+              max_temp={this.state.max_temp}
+              the_temp={this.state.the_temp}
+            />
+          </div>
+
+          <div className="right-glass-card">
+
+            {/* <TemChart
+                date={this.state.date}
+                min_temp={this.state.min_temp}
+                max_temp={this.state.max_temp}
+                the_temp={this.state.the_temp}
+              /> */}
+
+            <WindSpeed
+              date={this.state.date}
+              wind_speed={this.state.wind_speed}
+            />
+
+
+
+            <Humidity date={this.state.date} humidity={this.state.humidity} />
+
+
+            <LineChart
+              date={this.state.date}
+              air_pressure={this.state.air_pressure}
+              visibility={this.state.visibility}
+              predictability={this.state.predictability}
+            />
+          </div>
+        </div>
       </div>
+
     );
   }
 }

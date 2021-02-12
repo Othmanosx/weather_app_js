@@ -7,6 +7,7 @@ export default function WindSpeed(props) {
     if (props.wind_speed.length > 0) {
       document.querySelector(".WindSpeed").innerHTML = "";
       const ctx = document.createElement("canvas");
+      // ctx.style.backgroundColor = '#FDF5E6';
 
       new Chart(ctx, {
         type: "line",

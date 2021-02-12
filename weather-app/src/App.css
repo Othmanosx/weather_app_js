@@ -1,18 +1,49 @@
-.glass-card{
-  position: relative;
-    width: 355px;
-    /* height: 125px; */
-    margin: 50px auto;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 15px;
-    padding: 25px;
-    padding-right: 30px;
-    box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
-    backdrop-filter: blur(16px);
-    border: 1px solid #ffffff5e;
-    mix-blend-mode: hard-light;
+.left-glass-card{
+  position: fixed;
+  width: 48%;
+  height: fit-content;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
+  padding: 25px;
+  padding-right: 30px;
+  box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
+  backdrop-filter: blur(16px);
+  border: 1px solid #ffffff5e;
+  left: 15px;
+  top: 15px;
 }
 
+.right-glass-card{
+  position: absolute;
+  width: 48%;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 25px;
+  box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ffffff5e;
+  right: 0;
+  border-radius: 15px;
+  margin: 15px;
+}
+
+/* .main{
+  display: flex;
+  justify-content: space-around;
+} */
+
+#background-video{
+
+  height: 100%;
+  width: 100%;
+  float: left;
+  top: 0;
+  padding: none;
+  position: fixed; /* optional depending on what you want to do in your app */
+  object-fit: cover;
+
+  
+  }
+  
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -61,3 +92,7 @@
   height: 10%;
   object-fit: cover;
 }
+
+/* canvas{
+  background-color: #48D1CC;
+} */
