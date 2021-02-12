@@ -51,9 +51,9 @@ export default class container extends Component {
       .then((data) => {
         this.setState({ isLoading: false });
         {
-          var dayNum = new Date();
+          const dayNum = new Date();
 
-          var days = [
+          const days = [
             "Sunday",
             "Monday",
             "Tuesday",
@@ -73,7 +73,7 @@ export default class container extends Component {
           let predictability = [];
           let date = [];
           // Split data in individual arrays of first rendering
-          for (var i = 0; i < data["consolidated_weather"].length; i++) {
+          for (let i = 0; i < data["consolidated_weather"].length; i++) {
             min_temp.push(data["consolidated_weather"][i]["min_temp"]);
             max_temp.push(data["consolidated_weather"][i]["max_temp"]);
             the_temp.push(data["consolidated_weather"][i]["the_temp"]);
@@ -123,9 +123,9 @@ export default class container extends Component {
         .then((data) => {
           this.setState({ isLoading: false });
           {
-            var dayNum = new Date();
+            const dayNum = new Date();
 
-            var days = [
+            const days = [
               "Sunday",
               "Monday",
               "Tuesday",
@@ -145,7 +145,7 @@ export default class container extends Component {
             let predictability = [];
             let date = [];
             // Split data in individual arrays of another  rendering
-            for (var i = 0; i < data["consolidated_weather"].length; i++) {
+            for (let i = 0; i < data["consolidated_weather"].length; i++) {
               min_temp.push(data["consolidated_weather"][i]["min_temp"]);
               max_temp.push(data["consolidated_weather"][i]["max_temp"]);
               the_temp.push(data["consolidated_weather"][i]["the_temp"]);
@@ -227,17 +227,21 @@ export default class container extends Component {
         </video>
         <div className='main'>
 
-          <div className='left-glass-card'>
-            <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
-            <TemChart
-              date={this.state.date}
-              min_temp={this.state.min_temp}
-              max_temp={this.state.max_temp}
-              the_temp={this.state.the_temp}
-            />
+          <div className='left-container'>
+            <div className='glass-card'>
+              <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
+            </div>
+            <div className='glass-card'>
+              <TemChart
+                date={this.state.date}
+                min_temp={this.state.min_temp}
+                max_temp={this.state.max_temp}
+                the_temp={this.state.the_temp}
+              />
+              <Humidity date={this.state.date} humidity={this.state.humidity} />
+            </div>
           </div>
-
-          <div className="right-glass-card">
+          <div className="right-container">
 
             {/* <TemChart
                 date={this.state.date}
@@ -250,12 +254,6 @@ export default class container extends Component {
               date={this.state.date}
               wind_speed={this.state.wind_speed}
             />
-
-
-
-            <Humidity date={this.state.date} humidity={this.state.humidity} />
-
-
             <LineChart
               date={this.state.date}
               air_pressure={this.state.air_pressure}
@@ -264,7 +262,7 @@ export default class container extends Component {
             />
           </div>
         </div>
-      </div>
+      </div >
 
     );
   }

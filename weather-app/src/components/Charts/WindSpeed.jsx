@@ -8,6 +8,7 @@ export default function WindSpeed(props) {
       document.querySelector(".WindSpeed").innerHTML = "";
       const ctx = document.createElement("canvas");
       // ctx.style.backgroundColor = '#FDF5E6';
+      ctx.height = 300;
 
       new Chart(ctx, {
         type: "line",
@@ -18,7 +19,7 @@ export default function WindSpeed(props) {
               label: "Wind Speed",
               data: props.wind_speed,
               borderWidth: 2,
-            //   fill: false
+              //   fill: false
             },
           ],
         },

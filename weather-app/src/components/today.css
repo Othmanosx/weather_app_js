@@ -16,7 +16,7 @@ div.date
 {
   font-size: 14px;
   font-weight: bold;
-  color: white;
+  color: #6f7886;
 }
 
 div.city
@@ -25,20 +25,20 @@ div.city
   font-weight: bold;
   text-transform: uppercase;
   padding-top: 5px;
-  color: white;
+  color: #6f7886;
 }
 
 div.temp
 {
-  font-size: 81px;
-  color: white;
-  font-weight: 100;
+  font-size: 74.9px;
+  color: #6f7886;
+  font-weight: 200;
 }
 
 div.panel
 {
   /* display: inline-block; */
-  color: white;
+  color: #6f7886;
 }
 
 /* div.right-panel

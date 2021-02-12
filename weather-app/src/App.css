@@ -1,6 +1,5 @@
-.left-glass-card{
-  position: fixed;
-  width: 48%;
+.glass-card{
+  width: 45%;
   height: fit-content;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 15px;
@@ -8,22 +7,29 @@
   padding-right: 30px;
   box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
   backdrop-filter: blur(16px);
-  border: 1px solid #ffffff5e;
-  left: 15px;
-  top: 15px;
+  border: 1.5px solid #ffffff5e;
+  margin-bottom: 20px;
 }
 
-.right-glass-card{
+.left-container{
   position: absolute;
-  width: 48%;
+  width: 100%;
+  left: 15px;
+  top: 15px;
+  margin: 45px 30px;
+}
+
+.right-container{
+  position: absolute;
+  width: 44%;
   background-color: rgba(255, 255, 255, 0.4);
   padding: 25px;
   box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
   backdrop-filter: blur(10px);
-  border: 1px solid #ffffff5e;
+  border: 1.5px solid #ffffff5e;
   right: 0;
   border-radius: 15px;
-  margin: 15px;
+  margin: 60px;
 }
 
 /* .main{
