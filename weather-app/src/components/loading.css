@@ -1,26 +1,7 @@
-html { box-sizing: border-box; }
-html *,
-html *:before,
-html *:after { box-sizing: inherit; }
-
 .loading{
     text-align: center;
     margin-top: 245px;
 }
-
-h1 {
-  margin-bottom: 1.375em;
-  color: #000;
-  font-weight: 100;
-  font-size: 2em;
-  text-transform: uppercase;
-}
-p,
-a {
-  color: rgb(255, 255, 255);
-  font-size: small;
-}
-p { margin: 1.375rem 0; }
 
 .icon {
 
@@ -48,6 +29,7 @@ p { margin: 1.375rem 0; }
     -2.1875em 0.6875em 0 -0.3125em #000,
     2.0625em 0.9375em 0 -0.5625em #000;
 }
+
 .cloud:after {
   content: '';
   position: absolute;
@@ -59,6 +41,7 @@ p { margin: 1.375rem 0; }
   background: white;
   box-shadow: 0 0.4375em 0 -0.0625em #000;
 }
+
 .cloud:nth-child(2) {
   z-index: 0;
   background: #000;
@@ -72,6 +55,7 @@ p { margin: 1.375rem 0; }
   transform: scale(0.5) translate(6em, -3em);
   animation: cloud 4s linear infinite;
 }
+
 .cloud:nth-child(2):after { background: #000; }
 
 .sun {
@@ -86,6 +70,7 @@ p { margin: 1.375rem 0; }
   box-shadow: 0 0 0 0.375em #000;
   animation: spin 12s infinite linear;
 }
+
 .rays {
   position: absolute;
   top: -2em;
@@ -98,6 +83,7 @@ p { margin: 1.375rem 0; }
   border-radius: 0.25em;
   box-shadow: 0 5.375em #000;
 }
+
 .rays:before,
 .rays:after {
   content: '';
@@ -120,9 +106,7 @@ p { margin: 1.375rem 0; }
   margin: -2em 1em;
 }
 
-.rain,
-.lightning,
-.snow {
+.rain{
   position: absolute;
   z-index: 2;
   top: 50%;
@@ -151,92 +135,6 @@ p { margin: 1.375rem 0; }
   transform: rotate(-28deg);
   animation: rain 3s linear infinite;
 }
-
-.bolt {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -0.25em 0 0 -0.125em;
-  color: #000;
-  opacity: 0.3;
-  animation: lightning 2s linear infinite;
-}
-.bolt:nth-child(2) {
-  width: 0.5em;
-  height: 0.25em;
-  margin: -1.75em 0 0 -1.875em;
-  transform: translate(2.5em, 2.25em);
-  opacity: 0.2;
-  animation: lightning 1.5s linear infinite;
-}
-.bolt:before,
-.bolt:after {
-  content: '';
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  margin: -1.625em 0 0 -1.0125em;
-  border-top: 1.25em solid transparent;
-  border-right: 0.75em solid;
-  border-bottom: 0.75em solid;
-  border-left: 0.5em solid transparent;
-  transform: skewX(-10deg);
-}
-.bolt:after {
-  margin: -0.25em 0 0 -0.25em;
-  border-top: 0.75em solid;
-  border-right: 0.5em solid transparent;
-  border-bottom: 1.25em solid transparent;
-  border-left: 0.75em solid;
-  transform: skewX(-10deg);
-}
-.bolt:nth-child(2):before {
-  margin: -0.75em 0 0 -0.5em;
-  border-top: 0.625em solid transparent;
-  border-right: 0.375em solid;
-  border-bottom: 0.375em solid;
-  border-left: 0.25em solid transparent;
-}
-.bolt:nth-child(2):after {
-  margin: -0.125em 0 0 -0.125em;
-  border-top: 0.375em solid;
-  border-right: 0.25em solid transparent;
-  border-bottom: 0.625em solid transparent;
-  border-left: 0.375em solid;
-}
-
-.flake:before,
-.flake:after {
-  content: '\2744';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -1.025em 0 0 -1.0125em;
-  color: #000;
-  listHeight: 1em;
-  opacity: 0.2;
-  animation: spin 8s linear infinite reverse;
-}
-.flake:after {
-  margin: 0.125em 0 0 -1em;
-  font-size: 1.5em;
-  opacity: 0.4;
-  animation: spin 14s linear infinite;
-}
-.flake:nth-child(2):before {
-  margin: -0.5em 0 0 0.25em;
-  font-size: 1.25em;
-  opacity: 0.2;
-  animation: spin 10s linear infinite;
-}
-.flake:nth-child(2):after {
-  margin: 0.375em 0 0 0.125em;
-  font-size: 2em;
-  opacity: 0.4;
-  animation: spin 16s linear infinite reverse;
-}
-
 
 /* Animations */ 
 
@@ -279,23 +177,5 @@ p { margin: 1.375rem 0; }
       0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
       -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
       -1.375em -0.125em 0 #0cf;
-  }
-}
-
-@keyframes lightning {
-  45% {
-    color: #000;
-    background: #000;
-    opacity: 0.2;
-  }
-  50% {
-    color: #0cf;
-    background: #0cf;
-    opacity: 1;
-  }
-  55% {
-    color: #000;
-    background: #000;
-    opacity: 0.2;
   }
 }

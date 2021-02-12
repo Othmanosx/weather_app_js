@@ -209,13 +209,13 @@ export default class container extends Component {
     // console.log(this.state.data);
 
     if (this.state.isLoading) {
-      return <><div class="icon sun-shower">
-        <div class="cloud"></div>
-        <div class="sun">
-          <div class="rays"></div>
+      return <><div className="icon sun-shower">
+        <div className="cloud"></div>
+        <div className="sun">
+          <div className="rays"></div>
         </div>
-        <div class="rain"></div>
-      </div><h2 class='loading'>Loading...</h2></>;
+        <div className="rain"></div>
+      </div><h2 className='loading'>Loading...</h2></>;
     }
     return (
 
