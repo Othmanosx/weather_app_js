@@ -6,6 +6,9 @@ Weather  App using React js and base on this [API](https://www.metaweather.com/a
 - provide detailed Weather Forecasts over a 6 day period updated each day for more than  2000 cities in the world.
 - Charts provide wind speed, temperature, humidity and visibility.
 
+### Deployed on heroku
+[Weather-app](https://python-team-recoded.herokuapp.com/)
+
 ### Used libraries and dependencies:
 * react v17.0.1
 * chart.js v2.9.4
