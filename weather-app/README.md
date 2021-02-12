@@ -3,7 +3,7 @@
 Weather  App using React js and base on this [API](https://www.metaweather.com/api/)  
 
 ### features
-- provide detailed Weather Forecasts over a 6 day period updated each day over 200,000 cities in the world.
+- provide detailed Weather Forecasts over a 6 day period updated each day for more than  2000 cities in the world.
 - Charts provide wind speed, temperature, humidity and visibility.
 
 ### Used libraries and dependencies:
@@ -16,7 +16,7 @@ Weather  App using React js and base on this [API](https://www.metaweather.com/a
 * ajax v1.12.9
 
 ### Screenshot 
-
+![weather](weatherapp.png) 
 
 ## Developed By
 [Areeg Fahad](https://github.com/AREEG94FAHAD) 
