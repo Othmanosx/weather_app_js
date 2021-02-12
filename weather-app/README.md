@@ -34,6 +34,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Developed By
+[Areeg Fahad](https://github.com/AREEG94FAHAD) [Othman Shareef] (https://github.com/Othmanosx) [Abdulazeez Alabbasi] (https://github.com/Saganism)
+
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
