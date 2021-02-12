@@ -16,7 +16,8 @@ Weather  App using React js and base on this [API](https://www.metaweather.com/a
 * ajax v1.12.9
 
 ### Screenshot 
-![weather](weatherapp.PNG) 
+![weather](weatherapp.PNG= 24x48) 
+![weather](weatherapp.PNG=|width=48) 
 
 ## Developed By
 [Areeg Fahad](https://github.com/AREEG94FAHAD) 
