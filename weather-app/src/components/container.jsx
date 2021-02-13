@@ -82,7 +82,7 @@ export default class container extends Component {
             humidity.push(data["consolidated_weather"][i]["humidity"]);
             visibility.push(data["consolidated_weather"][i]["visibility"]);
             date.push(
-              //               get days name by date
+              //  get days name by date
               days[
               new Date(
                 data["consolidated_weather"][i]["applicable_date"]
@@ -187,6 +187,7 @@ export default class container extends Component {
           }
         });
     }
+
   }
 
   render() {
@@ -196,7 +197,6 @@ export default class container extends Component {
       ];
     const handelInput = (e) => {
       this.setState({ cityName: e.target.value });
-      // console.log(e.target.value);
     };
     const getWoeid = () => {
       fetch(
@@ -206,7 +206,6 @@ export default class container extends Component {
         .then((response) => response.json())
         .then((data) => this.setState({ wo: data[0]["woeid"] }));
     };
-    // console.log(this.state.data);
 
     if (this.state.isLoading) {
       return <><div className="icon sun-shower">
@@ -242,13 +241,6 @@ export default class container extends Component {
             </div>
           </div>
           <div className="right-container">
-
-            {/* <TemChart
-                date={this.state.date}
-                min_temp={this.state.min_temp}
-                max_temp={this.state.max_temp}
-                the_temp={this.state.the_temp}
-              /> */}
 
             <WindSpeed
               date={this.state.date}

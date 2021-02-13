@@ -32,14 +32,9 @@ export default function today(props) {
     }
     return (
         <div>
-            {/* <h1>Forcast for {props.state.title}</h1> */}
             <div
-                // className="widget"
                 style={{
-                    // backgroundImage: `url(${backgroundImage[
-                    //     backgroundImageIndex.indexOf(props.state.data.weather_state_abbr)
-                    // ]
-                    //     })`,
+
                     display: "flex",
                     flexWrap: "wrap",
                     justifyContent: "space-around",
