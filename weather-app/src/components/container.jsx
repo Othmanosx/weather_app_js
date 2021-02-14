@@ -44,6 +44,7 @@ export default class container extends Component {
     };
   }
 
+
   // first render
   componentDidMount() {
     fetch("https://www.metaweather.com/api/location/1979455/")
@@ -113,6 +114,9 @@ export default class container extends Component {
             // data:data
           });
         }
+      }).catch(e => {
+        console.log(e);
+        return e;
       });
   }
 
@@ -204,7 +208,10 @@ export default class container extends Component {
         this.state.cityName
       )
         .then((response) => response.json())
-        .then((data) => this.setState({ wo: data[0]["woeid"] }));
+        .then((data) => this.setState({ wo: data[0]["woeid"] })).catch(e => {
+          alert("Please enter capital city names only");
+          return e;
+        });
     };
 
     if (this.state.isLoading) {
