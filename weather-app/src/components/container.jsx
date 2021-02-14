@@ -73,7 +73,7 @@ export default class container extends Component {
           let visibility = [];
           let predictability = [];
           let date = [];
-          // Split data in individual arrays of first rendering
+          // Split data in individual arrays in the first render
           for (let i = 0; i < data["consolidated_weather"].length; i++) {
             min_temp.push(data["consolidated_weather"][i]["min_temp"]);
             max_temp.push(data["consolidated_weather"][i]["max_temp"]);
@@ -83,7 +83,7 @@ export default class container extends Component {
             humidity.push(data["consolidated_weather"][i]["humidity"]);
             visibility.push(data["consolidated_weather"][i]["visibility"]);
             date.push(
-              //  get days name by date
+              //  get day names by date
               days[
               new Date(
                 data["consolidated_weather"][i]["applicable_date"]
@@ -111,7 +111,6 @@ export default class container extends Component {
             title: data["title"],
             sun_rise: data["sun_rise"],
             sun_set: data["sun_set"],
-            // data:data
           });
         }
       }).catch(e => {
@@ -148,7 +147,7 @@ export default class container extends Component {
             let visibility = [];
             let predictability = [];
             let date = [];
-            // Split data in individual arrays of another  rendering
+            // Split data in individual arrays in another render
             for (let i = 0; i < data["consolidated_weather"].length; i++) {
               min_temp.push(data["consolidated_weather"][i]["min_temp"]);
               max_temp.push(data["consolidated_weather"][i]["max_temp"]);
