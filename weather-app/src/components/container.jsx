@@ -225,7 +225,7 @@ export default class container extends Component {
         </div>
         <div className="rain"></div>
       </div><h2 className='loading'>Loading...</h2>
-        {this.state.show && <center><p>if loading takes too long download and enable <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf">this extension</a> for Chrome</p></center>}</>;
+        {this.state.show && <center><p>if loading takes too long download and enable <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf" target="_blank">this extension</a> for Chrome</p></center>}</>;
 
     }
 
