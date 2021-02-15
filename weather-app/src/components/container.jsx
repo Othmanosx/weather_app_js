@@ -41,6 +41,7 @@ export default class container extends Component {
       title: "",
       sun_rise: "",
       sun_set: "",
+      show: false,
     };
   }
 
@@ -117,6 +118,9 @@ export default class container extends Component {
         console.log(e);
         return e;
       });
+    const timer = setTimeout(() => {
+      this.setState({ show: true })
+    }, 3000);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -220,8 +224,11 @@ export default class container extends Component {
           <div className="rays"></div>
         </div>
         <div className="rain"></div>
-      </div><h2 className='loading'>Loading...</h2></>;
+      </div><h2 className='loading'>Loading...</h2>
+        {this.state.show && <center><p>if loading takes too long download and enable <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf">this extension</a> for Chrome</p></center>}</>;
+
     }
+
     return (
 
       <div>
