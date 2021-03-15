@@ -40,19 +40,7 @@ export default function today(props) {
                     justifyContent: "space-around",
                 }}
             >
-                <img style={{
-                    width: "130px"
-                }} src={backgroundImage[backgroundImageIndex.indexOf(props.state.data.weather_state_abbr)]} alt="" />
-
-                <div className="left-panel panel">
-                    <div className="date">
-                        {props.state.date[0]} {props.state.data.applicable_date}
-                        <br />
-                    </div>
-                    <div className="city">{props.state.title}</div>
-                    <div className="temp">{Math.floor(props.state.the_temp[0])}&deg;</div>
-                </div>
-                <div className="right-panel panel">
+                <div style={{marginBottom: '20px'}} className="right-panel panel">
                     <div className='search'>
                         <ul id="growing-search-freebie">
                             <li>
@@ -81,6 +69,20 @@ export default function today(props) {
                         <i className="fas fa-moon"></i>
                     </div>
                 </div>
+                
+                <div className="left-panel panel">
+                    <div className="date">
+                        {props.state.date[0]} {props.state.data.applicable_date}
+                        <br />
+                    </div>
+                    <div className="city">{props.state.title}</div>
+                    <div className="temp">{Math.floor(props.state.the_temp[0])}&deg;</div>
+                </div>
+                <img style={{
+                    width: "130px"
+                }} src={backgroundImage[backgroundImageIndex.indexOf(props.state.data.weather_state_abbr)]} alt="" />
+
+                
             </div>
         </div>
     );

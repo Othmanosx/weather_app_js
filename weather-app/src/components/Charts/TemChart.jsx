@@ -46,7 +46,7 @@ export default function TemChart(props) {
           ],
         },
         options: {
-          aspectRatio: 16/7.16,
+          aspectRatio: 16/7.5,
           responsive: true,
           responsiveAnimationDuration: 2000,
           plugins: {
