@@ -8,7 +8,7 @@ export default function Humidity(props) {
       document.querySelector(".Humidity").innerHTML = "";
       const ctx = document.createElement("canvas");
       // ctx.style.backgroundColor = '#FDF5E6';
-      ctx.height = 234;
+      // ctx.height = 250;
 
       new Chart(ctx, {
         type: "doughnut",
@@ -24,6 +24,9 @@ export default function Humidity(props) {
           ],
         },
         options: {
+          aspectRatio: 16/11.9,
+          responsive: true,
+          responsiveAnimationDuration: 2000,
           plugins: {
             colorschemes: {
               scheme: "brewer.Accent4",
