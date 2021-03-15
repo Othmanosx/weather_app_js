@@ -42,28 +42,18 @@ export default class container extends Component {
       sun_rise: "",
       sun_set: "",
       show: false,
+      fetchedData: null
     };
   }
 
 
   // first render
   componentDidMount() {
-    fetch("https://www.metaweather.com/api/location/1979455/")
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=33.3406&lon=44.4009&exclude=hourly&appid=afeeafa25d3a3dae066200b885ac157b")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: false, fetchedData: data['daily'] });
         {
-          const dayNum = new Date();
-
-          const days = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-          ];
 
           let min_temp = [];
           let max_temp = [];
@@ -75,25 +65,26 @@ export default class container extends Component {
           let predictability = [];
           let date = [];
           // Split data in individual arrays in the first render
-          for (let i = 0; i < data["consolidated_weather"].length; i++) {
-            min_temp.push(data["consolidated_weather"][i]["min_temp"]);
-            max_temp.push(data["consolidated_weather"][i]["max_temp"]);
-            the_temp.push(data["consolidated_weather"][i]["the_temp"]);
-            wind_speed.push(data["consolidated_weather"][i]["wind_speed"]);
-            air_pressure.push(data["consolidated_weather"][i]["air_pressure"]);
-            humidity.push(data["consolidated_weather"][i]["humidity"]);
-            visibility.push(data["consolidated_weather"][i]["visibility"]);
+          for (let i = 0; i < data["daily"].length; i++) {
+            console.log(i);
+            min_temp.push(data['daily'][i]["temp"]["min"]-273.15)
+            max_temp.push(data["daily"][i]["temp"]["max"]-273.15);
+            the_temp.push(data["daily"][i]["the_temp"]-273.15);
+            wind_speed.push(data["daily"][i]["wind_speed"]);
+            air_pressure.push(data["daily"][i]["pressure"]);
+            humidity.push(data["daily"][i]["humidity"]);
+            visibility.push(data["daily"][i]["dew_point"]);
             date.push(
               //  get day names by date
-              days[
+              
               new Date(
-                data["consolidated_weather"][i]["applicable_date"]
-              ).getDay()
-              ]
+                data["daily"][i]["dt"]*1000
+              ).toDateString()
+              
             );
 
             predictability.push(
-              data["consolidated_weather"][i]["predictability"]
+              data["daily"][i]["clouds"]
             );
           }
 
@@ -107,11 +98,11 @@ export default class container extends Component {
             predictability: predictability,
             air_pressure: air_pressure,
             date: date,
-            data: data["consolidated_weather"][0],
+            data: data["daily"][0],
             parent: data["parent"],
             title: data["title"],
-            sun_rise: data["sun_rise"],
-            sun_set: data["sun_set"],
+            sun_rise: data["daily"][0]['sunrise'],
+            sun_set: data["daily"][0]['sunset'],
           });
         }
       }).catch(e => {
@@ -242,7 +233,7 @@ export default class container extends Component {
               <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
               <div>
               <TemChart
-                date={this.state.date}
+                date={this.state.date.map(day => day.slice(0,4)).slice(0,7)}
                 min_temp={this.state.min_temp}
                 max_temp={this.state.max_temp}
                 the_temp={this.state.the_temp}
@@ -250,18 +241,18 @@ export default class container extends Component {
             </div>
             
             <div className='glass-card'>
-              <Humidity date={this.state.date} humidity={this.state.humidity} />
+              <Humidity date={this.state.date.map(day => day.slice(0,4)).slice(0,7)} humidity={this.state.humidity} />
             </div>
           
           <div className="glass-card">
             <WindSpeed
-              date={this.state.date}
+              date={this.state.date.map(day => day.slice(0,4)).slice(0,7)}
               wind_speed={this.state.wind_speed}
             />
             </div>
             <div className="glass-card">
             <LineChart
-              date={this.state.date}
+              date={this.state.date.map(day => day.slice(0,4)).slice(0,7)}
               air_pressure={this.state.air_pressure}
               visibility={this.state.visibility}
               predictability={this.state.predictability}

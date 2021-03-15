@@ -27,8 +27,8 @@ export default function today(props) {
         "c",
     ];
     function convertTime(date) {
-        const event = new Date(date);
-        return event.toLocaleTimeString("en-US");
+        const event = new Date(date*1000);
+        return event.toLocaleTimeString();
     }
     return (
         <div>
