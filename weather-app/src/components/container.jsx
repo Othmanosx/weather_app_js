@@ -238,27 +238,28 @@ export default class container extends Component {
                 Your browser does not support the video tag.
         </video>
         <div className='main'>
-
-          <div className='left-container'>
             <div className='glass-card'>
               <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
             </div>
             <div className='glass-card'>
-              <TemChart
+            <TemChart
                 date={this.state.date}
                 min_temp={this.state.min_temp}
                 max_temp={this.state.max_temp}
                 the_temp={this.state.the_temp}
               />
+            </div>
+            <div className='glass-card'>
               <Humidity date={this.state.date} humidity={this.state.humidity} />
             </div>
-          </div>
-          <div className="right-container">
-
+          
+          <div className="glass-card">
             <WindSpeed
               date={this.state.date}
               wind_speed={this.state.wind_speed}
             />
+            </div>
+            <div className="glass-card">
             <LineChart
               date={this.state.date}
               air_pressure={this.state.air_pressure}
