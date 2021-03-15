@@ -1,6 +1,5 @@
 .glass-card{
-  width: 45%;
-  height: fit-content;
+  flex-basis: 560px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 15px;
   padding: 25px;
@@ -8,18 +7,28 @@
   box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
   backdrop-filter: blur(16px);
   border: 1.5px solid #ffffff5e;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  height: fit-content;
 }
 
-.left-container{
+.main{
+  margin-top: 20px;
+  margin: 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+}
+
+/* .left-container{
   position: absolute;
   width: 100%;
   left: 15px;
   top: 15px;
   margin: 45px 30px;
-}
+} */
 
-.right-container{
+/* .right-container{
   position: absolute;
   width: 44%;
   background-color: rgba(255, 255, 255, 0.4);
@@ -30,12 +39,9 @@
   right: 0;
   border-radius: 15px;
   margin: 60px;
-}
-
-/* .main{
-  display: flex;
-  justify-content: space-around;
 } */
+
+
 
 #background-video{
 

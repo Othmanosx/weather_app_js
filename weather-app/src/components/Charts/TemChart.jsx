@@ -8,7 +8,7 @@ export default function TemChart(props) {
       document.querySelector(".TemChart").innerHTML = "";
       const ctx = document.createElement("canvas");
       // ctx.style.backgroundColor = '#FDF5E6';
-      ctx.height = 234;
+      // ctx.height = 300;
 
       new Chart(ctx, {
         type: "bar",

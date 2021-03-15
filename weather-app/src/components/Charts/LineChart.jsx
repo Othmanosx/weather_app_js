@@ -8,7 +8,7 @@ export default function LineChart(props) {
       document.querySelector(".LineChart").innerHTML = "";
       const ctx = document.createElement("canvas");
       // ctx.style.backgroundColor = '#FDF5E6';
-      ctx.height = 300;
+      // ctx.height = 300;
 
       new Chart(ctx, {
         type: "line",
