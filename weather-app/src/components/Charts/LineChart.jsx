@@ -8,7 +8,7 @@ export default function LineChart(props) {
       document.querySelector(".LineChart").innerHTML = "";
       const ctx = document.createElement("canvas");
       // ctx.style.backgroundColor = '#FDF5E6';
-      // ctx.height = 300;
+      // ctx.height = 250;
 
       new Chart(ctx, {
         type: "line",
@@ -36,6 +36,9 @@ export default function LineChart(props) {
           ],
         },
         options: {
+          aspectRatio: 16/13,
+          responsive: true,
+          responsiveAnimationDuration: 2000,
           plugins: {
             colorschemes: {
               scheme: "brewer.Accent4",

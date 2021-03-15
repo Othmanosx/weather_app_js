@@ -240,15 +240,15 @@ export default class container extends Component {
         <div className='main'>
             <div className='glass-card'>
               <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
-            </div>
-            <div className='glass-card'>
-            <TemChart
+              <div>
+              <TemChart
                 date={this.state.date}
                 min_temp={this.state.min_temp}
                 max_temp={this.state.max_temp}
                 the_temp={this.state.the_temp}
-              />
+              /></div>
             </div>
+            
             <div className='glass-card'>
               <Humidity date={this.state.date} humidity={this.state.humidity} />
             </div>
