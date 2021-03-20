@@ -43,8 +43,8 @@ export default class container extends Component {
       sun_set: "",
       show: false,
       fetchedData: null,
-      // lat: 39.9199,
-      // lon: 32.8543
+      lat: 39.9199,
+      lon: 32.8543
     };
   }
 
