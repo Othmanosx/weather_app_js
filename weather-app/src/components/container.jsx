@@ -42,17 +42,26 @@ export default class container extends Component {
       sun_rise: "",
       sun_set: "",
       show: false,
-      fetchedData: null
+      fetchedData: null,
+      lat: 39.9199,
+      lon: 32.8543
     };
   }
 
-
   // first render
-  componentDidMount() {
-    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=33.3406&lon=44.4009&exclude=hourly&appid=afeeafa25d3a3dae066200b885ac157b")
+  componentDidMount = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition((position) => {
+        this.setState({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
+        console.log(this.state);
+      })}
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.lat}&lon=${this.state.lon}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ isLoading: false, fetchedData: data['daily'] });
+        this.setState({ isLoading: false, fetchedData: data });
         {
 
           let min_temp = [];
@@ -66,10 +75,9 @@ export default class container extends Component {
           let date = [];
           // Split data in individual arrays in the first render
           for (let i = 0; i < data["daily"].length; i++) {
-            console.log(i);
             min_temp.push(data['daily'][i]["temp"]["min"]-273.15)
             max_temp.push(data["daily"][i]["temp"]["max"]-273.15);
-            the_temp.push(data["daily"][i]["the_temp"]-273.15);
+            the_temp.push(data["current"]["temp"]-273.15);
             wind_speed.push(data["daily"][i]["wind_speed"]);
             air_pressure.push(data["daily"][i]["pressure"]);
             humidity.push(data["daily"][i]["humidity"]);
@@ -100,7 +108,7 @@ export default class container extends Component {
             date: date,
             data: data["daily"][0],
             parent: data["parent"],
-            title: data["title"],
+            title: data["timezone"],
             sun_rise: data["daily"][0]['sunrise'],
             sun_set: data["daily"][0]['sunset'],
           });
@@ -189,10 +197,10 @@ export default class container extends Component {
   }
 
   render() {
-    this.backgroundPhoto =
-      this.state.backGround[
-      this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
-      ];
+    this.backgroundPhoto = c
+      // this.state.backGround[
+      // this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
+      // ];
     const handelInput = (e) => {
       this.setState({ cityName: e.target.value });
     };
@@ -223,7 +231,7 @@ export default class container extends Component {
     return (
 
       <div>
-        <video key={this.state.data.weather_state_abbr} id="background-video" loop autoPlay muted>
+        <video key={this.state.data.weather_state_abbr} id="background-video" loop autoPlay muted playsInline>
           <source src={this.backgroundPhoto} type="video/mp4" />
           <source src={this.backgroundPhoto} type="video/ogg" />
                 Your browser does not support the video tag.

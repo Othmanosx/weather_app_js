@@ -57,7 +57,7 @@ export default function today(props) {
                         </ul>
                     </div>
                     <div>
-                        <h4>{props.state.data.weather_state_name}</h4>{" "}
+                        <h4>{props.state.data.weather? props.state.data.weather[0].main : null}</h4>{" "}
                     </div>
 
                     <div>
@@ -72,15 +72,19 @@ export default function today(props) {
                 
                 <div className="left-panel panel">
                     <div className="date">
-                        {props.state.date[0]} {props.state.data.applicable_date}
+                        {props.state.date[0]}
                         <br />
                     </div>
                     <div className="city">{props.state.title}</div>
                     <div className="temp">{Math.floor(props.state.the_temp[0])}&deg;</div>
                 </div>
                 <img style={{
-                    width: "130px"
-                }} src={backgroundImage[backgroundImageIndex.indexOf(props.state.data.weather_state_abbr)]} alt="" />
+                    width: "130px",
+                    height: 'intrinsic'
+                }} 
+                // src={backgroundImage[backgroundImageIndex.indexOf(props.state.data.weather_state_abbr)]}
+                src = {c}
+                 alt="" />
 
                 
             </div>
