@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TemChart from "./Charts/TemChart";
 import Today from "./today";
+import Loading from './loading'
 import './loading.css'
 import WindSpeed from "./Charts/WindSpeed";
 import Humidity from "./Charts/Humidity";
@@ -48,17 +49,8 @@ export default class container extends Component {
     };
   }
 
-  // first render
-  componentDidMount = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((position) => {
-        this.setState({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude
-        });
-        console.log(this.state);
-      })}
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.lat}&lon=${this.state.lon}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`)
+   fetchData = (api)=> {
+    fetch(api)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ isLoading: false, fetchedData: data });
@@ -116,10 +108,16 @@ export default class container extends Component {
       }).catch(e => {
         console.log(e);
         return e;
-      });
-    const timer = setTimeout(() => {
-      this.setState({ show: true })
-    }, 3000);
+      })
+    }
+
+  // first render
+  componentDidMount = () => {
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`;
+      this.fetchData(api);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -217,14 +215,7 @@ export default class container extends Component {
     };
 
     if (this.state.isLoading) {
-      return <><div className="icon sun-shower">
-        <div className="cloud"></div>
-        <div className="sun">
-          <div className="rays"></div>
-        </div>
-        <div className="rain"></div>
-      </div><h2 className='loading'>Loading...</h2>
-        {this.state.show && <center><p>if loading takes too long download and enable <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf" target="_blank">this extension</a> for Chrome</p></center>}</>;
+      return <Loading />
 
     }
 
