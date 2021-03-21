@@ -44,8 +44,7 @@ export default class container extends Component {
       sun_set: "",
       show: false,
       fetchedData: null,
-      // lat: 39.9199,
-      // lon: 32.8543
+
     };
   }
 
@@ -67,9 +66,9 @@ export default class container extends Component {
           let date = [];
           // Split data in individual arrays in the first render
           for (let i = 0; i < data["daily"].length; i++) {
-            min_temp.push(data['daily'][i]["temp"]["min"]-273.15)
-            max_temp.push(data["daily"][i]["temp"]["max"]-273.15);
-            the_temp.push(data["current"]["temp"]-273.15);
+            min_temp.push(data['daily'][i]["temp"]["min"])
+            max_temp.push(data["daily"][i]["temp"]["max"]);
+            the_temp.push(data["current"]["temp"]);
             wind_speed.push(data["daily"][i]["wind_speed"]);
             air_pressure.push(data["daily"][i]["pressure"]);
             humidity.push(data["daily"][i]["humidity"]);
@@ -113,10 +112,10 @@ export default class container extends Component {
 
   // first render
   componentDidMount = () => {
-    this.fetchData('https://api.openweathermap.org/data/2.5/onecall?lat=39.9199&lon=32.8543&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b');
+    this.fetchData('https://api.openweathermap.org/data/2.5/onecall?lat=39.9199&lon=32.8543&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric');
 
     navigator.geolocation.getCurrentPosition((position) => {
-      let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`;
+      let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`;
       this.fetchData(api);
     });
   }
@@ -202,14 +201,14 @@ export default class container extends Component {
       // ];
     const getWoeid = (cityName) => {
       // this.setState({cityName: cityName})
-      let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=afeeafa25d3a3dae066200b885ac157b`
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`
       console.log(url);
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
           let cityName = data.name;
 
-          let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`
+          let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`
           this.fetchData(api, cityName)
 
         }).catch(e => {

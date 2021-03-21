@@ -14,7 +14,8 @@ export default class search extends Component {
         this.setState({cityName: e.target.value})
     }
     onClick = (e) => {
-        this.props.onClick(this.state.cityName)        
+        this.props.onClick(this.state.cityName)
+        this.setState({cityName: ""})        
     }
 
     render() {
@@ -24,7 +25,7 @@ export default class search extends Component {
                 <li>
                     <div className="growing-search">
                         <div className="input">
-                            <input onChange={this.onChange} type="text" name="search" />
+                            <input onChange={this.onChange} type="text" name="search" value={this.state.cityName}/>
                         </div><div className="submit">
                             <button onClick={this.onClick} type="submit" name="go_search">
                                 <span className="fa fa-search"></span>
