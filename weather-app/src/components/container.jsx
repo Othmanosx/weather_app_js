@@ -53,13 +53,21 @@ export default class container extends Component {
             url: s
         },
         {
-            name: 'broken overcast clouds',
+            name: 'broken clouds',
             url: hc
         },
         {
-            name: 'few scattered clouds',
+            name: 'few clouds',
             url: lc
         },
+        {
+          name: 'overcast clouds',
+          url: hc
+      },
+      {
+          name: 'scattered clouds',
+          url: lc
+      },
         {
             name: 'clear',
             url: c
