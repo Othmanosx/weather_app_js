@@ -66,7 +66,6 @@ export default class container extends Component {
         },
         
     ],
-      wo: "1979455",
       isLoading: true,
       data: [],
       cityName: "Baghdad",
@@ -79,13 +78,12 @@ export default class container extends Component {
       visibility: [],
       predictability: [],
       date: [],
-      parent: {},
       title: "",
       sun_rise: "",
       sun_set: "",
       show: false,
       fetchedData: null,
-      backgroundPhoto: null,
+      backgroundPhoto: lc,
       id: ''
 
     };
@@ -146,7 +144,6 @@ export default class container extends Component {
             air_pressure: air_pressure,
             date: date,
             data: data["daily"][0],
-            parent: data["parent"],
             title: cityName? cityName : data["timezone"],
             sun_rise: data["daily"][0]['sunrise'],
             sun_set: data["daily"][0]['sunset'],
@@ -164,10 +161,8 @@ export default class container extends Component {
     }
 
     background = (weather) => {
-      // if (this.state.data.weather){
       console.log(weather.description);
         this.state.backgroundImage.map((item)=> weather.description.includes(item.name)? this.setState({backgroundPhoto: item.url, id: weather.id}) : null) 
-        // }
     }
 
   // first render
