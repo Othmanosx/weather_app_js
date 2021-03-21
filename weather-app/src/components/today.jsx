@@ -13,20 +13,53 @@ import lc from "./wallpapers/lightcloud.svg";
 import c from "./wallpapers/clear.svg";
 
 export default function today(props) {
-    const backgroundImage = [sn, sl, h, t, h, hr, lr, s, hc, lc, c];
-    const backgroundImageIndex = [
-        "sn",
-        "sl",
-        "h",
-        "t",
-        "h",
-        "hr",
-        "lr",
-        "s",
-        "hc",
-        "lc",
-        "c",
-    ];
+    let imgurl = ''
+    const backgroundImage = [
+        {
+            name: 'snow',
+            url: sn
+        },
+        {
+            name: 'sleet',
+            url: sl
+        },
+        {
+            name: 'hail',
+            url: h
+        },
+        {
+            name: 'thunderstorm',
+            url: t
+        },
+        {
+            name: 'heavy rain',
+            url: hr
+        },
+        {
+            name: 'light rain',
+            url: lr
+        },
+        {
+            name: 'shower rain',
+            url: s
+        },
+        {
+            name: 'broken overcast clouds',
+            url: hc
+        },
+        {
+            name: 'few scattered clouds',
+            url: lc
+        },
+        {
+            name: 'clear',
+            url: c
+        },
+        
+    ]
+    if (props.state.data.weather){
+    backgroundImage.map((item)=> props.state.data.weather[0].description.includes(item.name)? imgurl=item.url : null) }
+
     function convertTime(date) {
         const event = new Date(date*1000);
         return event.toLocaleTimeString();
@@ -44,7 +77,7 @@ export default function today(props) {
                 <div style={{marginBottom: '20px'}} className="right-panel panel">
                     <Search onClick={props.onClick} />
                     <div>
-                        <h4>{props.state.data.weather? props.state.data.weather[0].main : null}</h4>{" "}
+                        <h4>{props.state.data.weather? props.state.data.weather[0].description : null}</h4>{" "}
                     </div>
 
                     <div>
@@ -69,8 +102,7 @@ export default function today(props) {
                     width: "130px",
                     height: 'intrinsic'
                 }} 
-                // src={backgroundImage[backgroundImageIndex.indexOf(props.state.data.weather_state_abbr)]}
-                src = {c}
+                src = {imgurl}
                  alt="" />
 
                 

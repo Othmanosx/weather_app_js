@@ -23,8 +23,49 @@ export default class container extends Component {
     super(props);
 
     this.state = {
-      backGround: [sn, sl, h, t, h, hr, lr, s, hc, lc, c],
-      backGroundIndex: ['sn', 'sl', 'h', 't', 'h', 'hr', 'lr', 's', 'hc', 'lc', 'c'],
+      backgroundImage: [
+        {
+            name: 'snow',
+            url: sn
+        },
+        {
+            name: 'sleet',
+            url: sl
+        },
+        {
+            name: 'hail',
+            url: h
+        },
+        {
+            name: 'thunderstorm',
+            url: t
+        },
+        {
+            name: 'heavy rain',
+            url: hr
+        },
+        {
+            name: 'light rain',
+            url: lr
+        },
+        {
+            name: 'shower rain',
+            url: s
+        },
+        {
+            name: 'broken overcast clouds',
+            url: hc
+        },
+        {
+            name: 'few scattered clouds',
+            url: lc
+        },
+        {
+            name: 'clear',
+            url: c
+        },
+        
+    ],
       wo: "1979455",
       isLoading: true,
       data: [],
@@ -44,9 +85,14 @@ export default class container extends Component {
       sun_set: "",
       show: false,
       fetchedData: null,
+      backgroundPhoto: null,
+      id: ''
 
     };
+    
   }
+  
+
 
    fetchData = (api, cityName)=> {
     fetch(api)
@@ -87,6 +133,8 @@ export default class container extends Component {
             );
           }
 
+          this.background(data["daily"][0].weather[0])
+
           this.setState({
             min_temp: min_temp,
             max_temp: max_temp,
@@ -108,6 +156,18 @@ export default class container extends Component {
         console.log(e);
         return e;
       })
+
+      
+      
+      
+
+    }
+
+    background = (weather) => {
+      // if (this.state.data.weather){
+      console.log(weather.description);
+        this.state.backgroundImage.map((item)=> weather.description.includes(item.name)? this.setState({backgroundPhoto: item.url, id: weather.id}) : null) 
+        // }
     }
 
   // first render
@@ -117,92 +177,18 @@ export default class container extends Component {
     navigator.geolocation.getCurrentPosition((position) => {
       let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`;
       this.fetchData(api);
-    });
+    });  
+
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.wo !== this.state.wo) {
-  //     fetch("https://www.metaweather.com/api/location/" + this.state.wo)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         this.setState({ isLoading: false });
-  //         {
-  //           const dayNum = new Date();
-
-  //           const days = [
-  //             "Sunday",
-  //             "Monday",
-  //             "Tuesday",
-  //             "Wednesday",
-  //             "Thursday",
-  //             "Friday",
-  //             "Saturday",
-  //           ];
-
-  //           let min_temp = [];
-  //           let max_temp = [];
-  //           let the_temp = [];
-  //           let wind_speed = [];
-  //           let air_pressure = [];
-  //           let humidity = [];
-  //           let visibility = [];
-  //           let predictability = [];
-  //           let date = [];
-  //           // Split data in individual arrays in another render
-  //           for (let i = 0; i < data["consolidated_weather"].length; i++) {
-  //             min_temp.push(data["consolidated_weather"][i]["min_temp"]);
-  //             max_temp.push(data["consolidated_weather"][i]["max_temp"]);
-  //             the_temp.push(data["consolidated_weather"][i]["the_temp"]);
-  //             wind_speed.push(data["consolidated_weather"][i]["wind_speed"]);
-  //             air_pressure.push(
-  //               data["consolidated_weather"][i]["air_pressure"]
-  //             );
-  //             humidity.push(data["consolidated_weather"][i]["humidity"]);
-  //             visibility.push(data["consolidated_weather"][i]["visibility"]);
-  //             date.push(
-  //               days[
-  //               new Date(
-  //                 data["consolidated_weather"][i]["applicable_date"]
-  //               ).getDay()
-  //               ]
-  //             );
-
-  //             predictability.push(
-  //               data["consolidated_weather"][i]["predictability"]
-  //             );
-  //           }
-
-  //           this.setState({
-  //             min_temp: min_temp,
-  //             max_temp: max_temp,
-  //             the_temp: the_temp,
-  //             wind_speed: wind_speed,
-  //             humidity: humidity,
-  //             visibility: visibility,
-  //             predictability: predictability,
-  //             air_pressure: air_pressure,
-  //             date: date,
-  //             data: data["consolidated_weather"][0],
-  //             parent: data["parent"],
-  //             title: data["title"],
-  //             sun_rise: data["sun_rise"],
-  //             sun_set: data["sun_set"],
-  //           });
-  //         }
-  //       });
-  //   }
-
-  // }
-
   render() {
-    this.backgroundPhoto = c
+    
       // this.state.backGround[
       // this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
       // ];
     const getWoeid = (cityName) => {
       // this.setState({cityName: cityName})
       let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`
-      console.log(url);
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -213,7 +199,7 @@ export default class container extends Component {
 
         }).catch(e => {
           console.log(e);
-          alert("Please enter capital city names only");
+          alert("Please enter city names only");
           return e;
         }
         );
@@ -229,9 +215,9 @@ export default class container extends Component {
     return (
 
       <div>
-        <video key={this.state.data.weather_state_abbr} id="background-video" loop autoPlay muted playsInline>
-          <source src={this.backgroundPhoto} type="video/mp4" />
-          <source src={this.backgroundPhoto} type="video/ogg" />
+        <video key={this.state.id} id="background-video" loop autoPlay muted playsInline>
+          <source src={this.state.backgroundPhoto} type="video/mp4" />
+          <source src={this.state.backgroundPhoto} type="video/ogg" />
                 Your browser does not support the video tag.
         </video>
         <div className='main'>
