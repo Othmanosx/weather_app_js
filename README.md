@@ -1,13 +1,13 @@
 # Weather App using React 
 
-Weather  App using React js and base on this [API](https://www.metaweather.com/api/)  
+Weather  App using React js and base on OpenWeatherMap API
 
 ### features
 - provide detailed Weather Forecasts over a 6 day period updated each day for more than  2000 cities in the world.
 - Charts provide wind speed, temperature, humidity and visibility.
 
-### Deployed on heroku
-[Weather-app](https://python-team-recoded.herokuapp.com/)
+### Deployed on netlify
+[Weather-app](https://weather-app-othman.netlify.app/)
 
 ### Used libraries and dependencies:
 * react v17.0.1
