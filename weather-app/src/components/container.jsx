@@ -90,8 +90,6 @@ export default class container extends Component {
     
   }
   
-
-
    fetchData = (api, cityName)=> {
     fetch(api)
       .then((response) => response.json())
@@ -119,11 +117,9 @@ export default class container extends Component {
             visibility.push(data["daily"][i]["dew_point"]);
             date.push(
               //  get day names by date
-              
               new Date(
                 data["daily"][i]["dt"]*1000
               ).toDateString()
-              
             );
 
             predictability.push(
@@ -154,18 +150,12 @@ export default class container extends Component {
         return e;
       })
 
-      
-      
-      
-
     }
 
     background = (weather) => {
-      console.log(weather.description);
         this.state.backgroundImage.map((item)=> weather.description.includes(item.name)? this.setState({backgroundPhoto: item.url, id: weather.id}) : null) 
     }
 
-  // first render
   componentDidMount = () => {
     this.fetchData('https://api.openweathermap.org/data/2.5/onecall?lat=39.9199&lon=32.8543&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric');
 
@@ -177,12 +167,7 @@ export default class container extends Component {
   }
 
   render() {
-    
-      // this.state.backGround[
-      // this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
-      // ];
     const getWoeid = (cityName) => {
-      // this.setState({cityName: cityName})
       let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`
       fetch(url)
         .then((response) => response.json())
@@ -198,18 +183,14 @@ export default class container extends Component {
           return e;
         }
         );
-        
-      
     };
 
     if (this.state.isLoading) {
       return <Loading />
-
     }
 
     return (
-
-      <div>
+      <>
         <video key={this.state.id} id="background-video" loop autoPlay muted playsInline>
           <source src={this.state.backgroundPhoto} type="video/mp4" />
           <source src={this.state.backgroundPhoto} type="video/ogg" />
@@ -246,8 +227,7 @@ export default class container extends Component {
             />
           </div>
         </div>
-      </div >
-
+      </>
     );
   }
 }
