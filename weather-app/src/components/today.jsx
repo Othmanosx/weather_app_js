@@ -1,4 +1,5 @@
 import React from "react";
+import Search from './search'
 import "./today.css";
 import sn from "./wallpapers/snow.svg";
 import sl from "./wallpapers/sleet.svg";
@@ -41,21 +42,7 @@ export default function today(props) {
                 }}
             >
                 <div style={{marginBottom: '20px'}} className="right-panel panel">
-                    <div className='search'>
-                        <ul id="growing-search-freebie">
-                            <li>
-                                <div className="growing-search">
-                                    <div className="input">
-                                        <input onChange={props.onChange} type="text" name="search" />
-                                    </div><div className="submit">
-                                        <button onClick={props.onClick} type="submit" name="go_search">
-                                            <span className="fa fa-search"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <Search onClick={props.onClick} />
                     <div>
                         <h4>{props.state.data.weather? props.state.data.weather[0].main : null}</h4>{" "}
                     </div>

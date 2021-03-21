@@ -44,8 +44,8 @@ export default class container extends Component {
       sun_set: "",
       show: false,
       fetchedData: null,
-      lat: 39.9199,
-      lon: 32.8543
+      // lat: 39.9199,
+      // lon: 32.8543
     };
   }
 
@@ -100,7 +100,7 @@ export default class container extends Component {
             date: date,
             data: data["daily"][0],
             parent: data["parent"],
-            title: data["timezone"],
+            // title: data["timezone"],
             sun_rise: data["daily"][0]['sunrise'],
             sun_set: data["daily"][0]['sunset'],
           });
@@ -113,105 +113,114 @@ export default class container extends Component {
 
   // first render
   componentDidMount = () => {
-
+    
     navigator.geolocation.getCurrentPosition((position) => {
       let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`;
       this.fetchData(api);
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.wo !== this.state.wo) {
-      fetch("https://www.metaweather.com/api/location/" + this.state.wo)
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({ isLoading: false });
-          {
-            const dayNum = new Date();
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.wo !== this.state.wo) {
+  //     fetch("https://www.metaweather.com/api/location/" + this.state.wo)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         this.setState({ isLoading: false });
+  //         {
+  //           const dayNum = new Date();
 
-            const days = [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-            ];
+  //           const days = [
+  //             "Sunday",
+  //             "Monday",
+  //             "Tuesday",
+  //             "Wednesday",
+  //             "Thursday",
+  //             "Friday",
+  //             "Saturday",
+  //           ];
 
-            let min_temp = [];
-            let max_temp = [];
-            let the_temp = [];
-            let wind_speed = [];
-            let air_pressure = [];
-            let humidity = [];
-            let visibility = [];
-            let predictability = [];
-            let date = [];
-            // Split data in individual arrays in another render
-            for (let i = 0; i < data["consolidated_weather"].length; i++) {
-              min_temp.push(data["consolidated_weather"][i]["min_temp"]);
-              max_temp.push(data["consolidated_weather"][i]["max_temp"]);
-              the_temp.push(data["consolidated_weather"][i]["the_temp"]);
-              wind_speed.push(data["consolidated_weather"][i]["wind_speed"]);
-              air_pressure.push(
-                data["consolidated_weather"][i]["air_pressure"]
-              );
-              humidity.push(data["consolidated_weather"][i]["humidity"]);
-              visibility.push(data["consolidated_weather"][i]["visibility"]);
-              date.push(
-                days[
-                new Date(
-                  data["consolidated_weather"][i]["applicable_date"]
-                ).getDay()
-                ]
-              );
+  //           let min_temp = [];
+  //           let max_temp = [];
+  //           let the_temp = [];
+  //           let wind_speed = [];
+  //           let air_pressure = [];
+  //           let humidity = [];
+  //           let visibility = [];
+  //           let predictability = [];
+  //           let date = [];
+  //           // Split data in individual arrays in another render
+  //           for (let i = 0; i < data["consolidated_weather"].length; i++) {
+  //             min_temp.push(data["consolidated_weather"][i]["min_temp"]);
+  //             max_temp.push(data["consolidated_weather"][i]["max_temp"]);
+  //             the_temp.push(data["consolidated_weather"][i]["the_temp"]);
+  //             wind_speed.push(data["consolidated_weather"][i]["wind_speed"]);
+  //             air_pressure.push(
+  //               data["consolidated_weather"][i]["air_pressure"]
+  //             );
+  //             humidity.push(data["consolidated_weather"][i]["humidity"]);
+  //             visibility.push(data["consolidated_weather"][i]["visibility"]);
+  //             date.push(
+  //               days[
+  //               new Date(
+  //                 data["consolidated_weather"][i]["applicable_date"]
+  //               ).getDay()
+  //               ]
+  //             );
 
-              predictability.push(
-                data["consolidated_weather"][i]["predictability"]
-              );
-            }
+  //             predictability.push(
+  //               data["consolidated_weather"][i]["predictability"]
+  //             );
+  //           }
 
-            this.setState({
-              min_temp: min_temp,
-              max_temp: max_temp,
-              the_temp: the_temp,
-              wind_speed: wind_speed,
-              humidity: humidity,
-              visibility: visibility,
-              predictability: predictability,
-              air_pressure: air_pressure,
-              date: date,
-              data: data["consolidated_weather"][0],
-              parent: data["parent"],
-              title: data["title"],
-              sun_rise: data["sun_rise"],
-              sun_set: data["sun_set"],
-            });
-          }
-        });
-    }
+  //           this.setState({
+  //             min_temp: min_temp,
+  //             max_temp: max_temp,
+  //             the_temp: the_temp,
+  //             wind_speed: wind_speed,
+  //             humidity: humidity,
+  //             visibility: visibility,
+  //             predictability: predictability,
+  //             air_pressure: air_pressure,
+  //             date: date,
+  //             data: data["consolidated_weather"][0],
+  //             parent: data["parent"],
+  //             title: data["title"],
+  //             sun_rise: data["sun_rise"],
+  //             sun_set: data["sun_set"],
+  //           });
+  //         }
+  //       });
+  //   }
 
-  }
+  // }
 
   render() {
     this.backgroundPhoto = c
       // this.state.backGround[
       // this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
       // ];
-    const handelInput = (e) => {
-      this.setState({ cityName: e.target.value });
-    };
-    const getWoeid = () => {
-      fetch(
-        "https://www.metaweather.com/api/location/search/?query=" +
-        this.state.cityName
-      )
+    const getWoeid = (cityName) => {
+      // this.setState({cityName: cityName})
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=afeeafa25d3a3dae066200b885ac157b`
+      console.log(url);
+      fetch(url)
         .then((response) => response.json())
-        .then((data) => this.setState({ wo: data[0]["woeid"] })).catch(e => {
+        .then((data) => {
+          let cityName = data.name;
+          let lon = data.coord.lon;
+          let lat = data.coord.lat
+          this.setState({ title: cityName, cityName: data.name, lon: data.coord.lon, lat: data.coord.lat })
+          let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`
+          this.fetchData(api)
+
+        }).catch(e => {
+          console.log(e);
           alert("Please enter capital city names only");
           return e;
-        });
+        }
+        );
+        
+      
     };
 
     if (this.state.isLoading) {
@@ -229,7 +238,7 @@ export default class container extends Component {
         </video>
         <div className='main'>
             <div className='glass-card'>
-              <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
+              <Today state={this.state} onClick={getWoeid} />
               <div>
               <TemChart
                 date={this.state.date.map(day => day.slice(0,4)).slice(0,7)}
