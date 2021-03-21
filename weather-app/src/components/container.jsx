@@ -49,7 +49,7 @@ export default class container extends Component {
     };
   }
 
-   fetchData = (api)=> {
+   fetchData = (api, cityName)=> {
     fetch(api)
       .then((response) => response.json())
       .then((data) => {
@@ -100,7 +100,7 @@ export default class container extends Component {
             date: date,
             data: data["daily"][0],
             parent: data["parent"],
-            // title: data["timezone"],
+            title: cityName? cityName : data["timezone"],
             sun_rise: data["daily"][0]['sunrise'],
             sun_set: data["daily"][0]['sunset'],
           });
@@ -113,7 +113,8 @@ export default class container extends Component {
 
   // first render
   componentDidMount = () => {
-    
+    this.fetchData('https://api.openweathermap.org/data/2.5/onecall?lat=39.9199&lon=32.8543&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b');
+
     navigator.geolocation.getCurrentPosition((position) => {
       let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`;
       this.fetchData(api);
@@ -207,11 +208,9 @@ export default class container extends Component {
         .then((response) => response.json())
         .then((data) => {
           let cityName = data.name;
-          let lon = data.coord.lon;
-          let lat = data.coord.lat
-          this.setState({ title: cityName, cityName: data.name, lon: data.coord.lon, lat: data.coord.lat })
+
           let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b`
-          this.fetchData(api)
+          this.fetchData(api, cityName)
 
         }).catch(e => {
           console.log(e);
