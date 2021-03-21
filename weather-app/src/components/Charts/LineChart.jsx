@@ -22,13 +22,13 @@ export default function LineChart(props) {
               fill: false,
             },
             {
-              label: "Visibility",
+              label: "Dew Point",
               data: props.visibility,
               borderWidth: 2,
               fill: false,
             },
             {
-              label: "Predictability",
+              label: "Clouds",
               data: props.predictability,
               borderWidth: 2,
               fill: false,

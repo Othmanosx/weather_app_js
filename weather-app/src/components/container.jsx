@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TemChart from "./Charts/TemChart";
 import Today from "./today";
+import Loading from './loading'
 import './loading.css'
 import WindSpeed from "./Charts/WindSpeed";
 import Humidity from "./Charts/Humidity";
@@ -22,9 +23,49 @@ export default class container extends Component {
     super(props);
 
     this.state = {
-      backGround: [sn, sl, h, t, h, hr, lr, s, hc, lc, c],
-      backGroundIndex: ['sn', 'sl', 'h', 't', 'h', 'hr', 'lr', 's', 'hc', 'lc', 'c'],
-      wo: "1979455",
+      backgroundImage: [
+        {
+            name: 'snow',
+            url: sn
+        },
+        {
+            name: 'sleet',
+            url: sl
+        },
+        {
+            name: 'hail',
+            url: h
+        },
+        {
+            name: 'thunderstorm',
+            url: t
+        },
+        {
+            name: 'heavy rain',
+            url: hr
+        },
+        {
+            name: 'light rain',
+            url: lr
+        },
+        {
+            name: 'shower rain',
+            url: s
+        },
+        {
+            name: 'broken overcast clouds',
+            url: hc
+        },
+        {
+            name: 'few scattered clouds',
+            url: lc
+        },
+        {
+            name: 'clear',
+            url: c
+        },
+        
+    ],
       isLoading: true,
       data: [],
       cityName: "Baghdad",
@@ -37,33 +78,24 @@ export default class container extends Component {
       visibility: [],
       predictability: [],
       date: [],
-      parent: {},
       title: "",
       sun_rise: "",
       sun_set: "",
       show: false,
+      fetchedData: null,
+      backgroundPhoto: lc,
+      id: ''
+
     };
+    
   }
-
-
-  // first render
-  componentDidMount() {
-    fetch("https://www.metaweather.com/api/location/1979455/")
+  
+   fetchData = (api, cityName)=> {
+    fetch(api)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: false, fetchedData: data });
         {
-          const dayNum = new Date();
-
-          const days = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-          ];
 
           let min_temp = [];
           let max_temp = [];
@@ -75,27 +107,27 @@ export default class container extends Component {
           let predictability = [];
           let date = [];
           // Split data in individual arrays in the first render
-          for (let i = 0; i < data["consolidated_weather"].length; i++) {
-            min_temp.push(data["consolidated_weather"][i]["min_temp"]);
-            max_temp.push(data["consolidated_weather"][i]["max_temp"]);
-            the_temp.push(data["consolidated_weather"][i]["the_temp"]);
-            wind_speed.push(data["consolidated_weather"][i]["wind_speed"]);
-            air_pressure.push(data["consolidated_weather"][i]["air_pressure"]);
-            humidity.push(data["consolidated_weather"][i]["humidity"]);
-            visibility.push(data["consolidated_weather"][i]["visibility"]);
+          for (let i = 0; i < data["daily"].length; i++) {
+            min_temp.push(data['daily'][i]["temp"]["min"])
+            max_temp.push(data["daily"][i]["temp"]["max"]);
+            the_temp.push(data["current"]["temp"]);
+            wind_speed.push(data["daily"][i]["wind_speed"]);
+            air_pressure.push(data["daily"][i]["pressure"]);
+            humidity.push(data["daily"][i]["humidity"]);
+            visibility.push(data["daily"][i]["dew_point"]);
             date.push(
               //  get day names by date
-              days[
               new Date(
-                data["consolidated_weather"][i]["applicable_date"]
-              ).getDay()
-              ]
+                data["daily"][i]["dt"]*1000
+              ).toDateString()
             );
 
             predictability.push(
-              data["consolidated_weather"][i]["predictability"]
+              data["daily"][i]["clouds"]
             );
           }
+
+          this.background(data["daily"][0].weather[0])
 
           this.setState({
             min_temp: min_temp,
@@ -107,142 +139,69 @@ export default class container extends Component {
             predictability: predictability,
             air_pressure: air_pressure,
             date: date,
-            data: data["consolidated_weather"][0],
-            parent: data["parent"],
-            title: data["title"],
-            sun_rise: data["sun_rise"],
-            sun_set: data["sun_set"],
+            data: data["daily"][0],
+            title: cityName? cityName : data["timezone"],
+            sun_rise: data["daily"][0]['sunrise'],
+            sun_set: data["daily"][0]['sunset'],
           });
         }
       }).catch(e => {
         console.log(e);
         return e;
-      });
-    const timer = setTimeout(() => {
-      this.setState({ show: true })
-    }, 3000);
-  }
+      })
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.wo !== this.state.wo) {
-      fetch("https://www.metaweather.com/api/location/" + this.state.wo)
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({ isLoading: false });
-          {
-            const dayNum = new Date();
-
-            const days = [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-            ];
-
-            let min_temp = [];
-            let max_temp = [];
-            let the_temp = [];
-            let wind_speed = [];
-            let air_pressure = [];
-            let humidity = [];
-            let visibility = [];
-            let predictability = [];
-            let date = [];
-            // Split data in individual arrays in another render
-            for (let i = 0; i < data["consolidated_weather"].length; i++) {
-              min_temp.push(data["consolidated_weather"][i]["min_temp"]);
-              max_temp.push(data["consolidated_weather"][i]["max_temp"]);
-              the_temp.push(data["consolidated_weather"][i]["the_temp"]);
-              wind_speed.push(data["consolidated_weather"][i]["wind_speed"]);
-              air_pressure.push(
-                data["consolidated_weather"][i]["air_pressure"]
-              );
-              humidity.push(data["consolidated_weather"][i]["humidity"]);
-              visibility.push(data["consolidated_weather"][i]["visibility"]);
-              date.push(
-                days[
-                new Date(
-                  data["consolidated_weather"][i]["applicable_date"]
-                ).getDay()
-                ]
-              );
-
-              predictability.push(
-                data["consolidated_weather"][i]["predictability"]
-              );
-            }
-
-            this.setState({
-              min_temp: min_temp,
-              max_temp: max_temp,
-              the_temp: the_temp,
-              wind_speed: wind_speed,
-              humidity: humidity,
-              visibility: visibility,
-              predictability: predictability,
-              air_pressure: air_pressure,
-              date: date,
-              data: data["consolidated_weather"][0],
-              parent: data["parent"],
-              title: data["title"],
-              sun_rise: data["sun_rise"],
-              sun_set: data["sun_set"],
-            });
-          }
-        });
     }
+
+    background = (weather) => {
+        this.state.backgroundImage.map((item)=> weather.description.includes(item.name)? this.setState({backgroundPhoto: item.url, id: weather.id}) : null) 
+    }
+
+  componentDidMount = () => {
+    this.fetchData('https://api.openweathermap.org/data/2.5/onecall?lat=39.9199&lon=32.8543&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric');
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`;
+      this.fetchData(api);
+    });  
 
   }
 
   render() {
-    this.backgroundPhoto =
-      this.state.backGround[
-      this.state.backGroundIndex.indexOf(this.state.data.weather_state_abbr)
-      ];
-    const handelInput = (e) => {
-      this.setState({ cityName: e.target.value });
-    };
-    const getWoeid = () => {
-      fetch(
-        "https://www.metaweather.com/api/location/search/?query=" +
-        this.state.cityName
-      )
+    const getWoeid = (cityName) => {
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`
+      fetch(url)
         .then((response) => response.json())
-        .then((data) => this.setState({ wo: data[0]["woeid"] })).catch(e => {
-          alert("Please enter capital city names only");
+        .then((data) => {
+          let cityName = data.name;
+
+          let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely&appid=afeeafa25d3a3dae066200b885ac157b&units=metric`
+          this.fetchData(api, cityName)
+
+        }).catch(e => {
+          console.log(e);
+          alert("Please enter city names only");
           return e;
-        });
+        }
+        );
     };
 
     if (this.state.isLoading) {
-      return <><div className="icon sun-shower">
-        <div className="cloud"></div>
-        <div className="sun">
-          <div className="rays"></div>
-        </div>
-        <div className="rain"></div>
-      </div><h2 className='loading'>Loading...</h2>
-        {this.state.show && <center><p>if loading takes too long download and enable <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf" target="_blank">this extension</a> for Chrome</p></center>}</>;
-
+      return <Loading />
     }
 
     return (
-
-      <div>
-        <video key={this.state.data.weather_state_abbr} id="background-video" loop autoPlay muted>
-          <source src={this.backgroundPhoto} type="video/mp4" />
-          <source src={this.backgroundPhoto} type="video/ogg" />
+      <>
+        <video key={this.state.id} id="background-video" loop autoPlay muted playsInline>
+          <source src={this.state.backgroundPhoto} type="video/mp4" />
+          <source src={this.state.backgroundPhoto} type="video/ogg" />
                 Your browser does not support the video tag.
         </video>
         <div className='main'>
             <div className='glass-card'>
-              <Today state={this.state} onChange={handelInput} onClick={getWoeid} />
+              <Today state={this.state} onClick={getWoeid} />
               <div>
               <TemChart
-                date={this.state.date}
+                date={this.state.date.map(day => day.slice(0,4)).slice(0,7)}
                 min_temp={this.state.min_temp}
                 max_temp={this.state.max_temp}
                 the_temp={this.state.the_temp}
@@ -250,26 +209,25 @@ export default class container extends Component {
             </div>
             
             <div className='glass-card'>
-              <Humidity date={this.state.date} humidity={this.state.humidity} />
+              <Humidity date={this.state.date.map(day => day.slice(0,4)).slice(0,7)} humidity={this.state.humidity} />
             </div>
           
           <div className="glass-card">
             <WindSpeed
-              date={this.state.date}
+              date={this.state.date.map(day => day.slice(0,4)).slice(0,7)}
               wind_speed={this.state.wind_speed}
             />
             </div>
             <div className="glass-card">
             <LineChart
-              date={this.state.date}
+              date={this.state.date.map(day => day.slice(0,4)).slice(0,7)}
               air_pressure={this.state.air_pressure}
               visibility={this.state.visibility}
               predictability={this.state.predictability}
             />
           </div>
         </div>
-      </div >
-
+      </>
     );
   }
 }

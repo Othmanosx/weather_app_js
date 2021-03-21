@@ -1,4 +1,5 @@
 import React from "react";
+import Search from './search'
 import "./today.css";
 import sn from "./wallpapers/snow.svg";
 import sl from "./wallpapers/sleet.svg";
@@ -12,23 +13,56 @@ import lc from "./wallpapers/lightcloud.svg";
 import c from "./wallpapers/clear.svg";
 
 export default function today(props) {
-    const backgroundImage = [sn, sl, h, t, h, hr, lr, s, hc, lc, c];
-    const backgroundImageIndex = [
-        "sn",
-        "sl",
-        "h",
-        "t",
-        "h",
-        "hr",
-        "lr",
-        "s",
-        "hc",
-        "lc",
-        "c",
-    ];
+    let imgurl = ''
+    const backgroundImage = [
+        {
+            name: 'snow',
+            url: sn
+        },
+        {
+            name: 'sleet',
+            url: sl
+        },
+        {
+            name: 'hail',
+            url: h
+        },
+        {
+            name: 'thunderstorm',
+            url: t
+        },
+        {
+            name: 'heavy rain',
+            url: hr
+        },
+        {
+            name: 'light rain',
+            url: lr
+        },
+        {
+            name: 'shower rain',
+            url: s
+        },
+        {
+            name: 'broken overcast clouds',
+            url: hc
+        },
+        {
+            name: 'few scattered clouds',
+            url: lc
+        },
+        {
+            name: 'clear',
+            url: c
+        },
+        
+    ]
+    if (props.state.data.weather){
+    backgroundImage.map((item)=> props.state.data.weather[0].description.includes(item.name)? imgurl=item.url : null) }
+
     function convertTime(date) {
-        const event = new Date(date);
-        return event.toLocaleTimeString("en-US");
+        const event = new Date(date*1000);
+        return event.toLocaleTimeString();
     }
     return (
         <div>
@@ -41,23 +75,9 @@ export default function today(props) {
                 }}
             >
                 <div style={{marginBottom: '20px'}} className="right-panel panel">
-                    <div className='search'>
-                        <ul id="growing-search-freebie">
-                            <li>
-                                <div className="growing-search">
-                                    <div className="input">
-                                        <input onChange={props.onChange} type="text" name="search" />
-                                    </div><div className="submit">
-                                        <button onClick={props.onClick} type="submit" name="go_search">
-                                            <span className="fa fa-search"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <Search onClick={props.onClick} />
                     <div>
-                        <h4>{props.state.data.weather_state_name}</h4>{" "}
+                        <h4>{props.state.data.weather? props.state.data.weather[0].description : null}</h4>{" "}
                     </div>
 
                     <div>
@@ -72,15 +92,18 @@ export default function today(props) {
                 
                 <div className="left-panel panel">
                     <div className="date">
-                        {props.state.date[0]} {props.state.data.applicable_date}
+                        {props.state.date[0]}
                         <br />
                     </div>
                     <div className="city">{props.state.title}</div>
                     <div className="temp">{Math.floor(props.state.the_temp[0])}&deg;</div>
                 </div>
                 <img style={{
-                    width: "130px"
-                }} src={backgroundImage[backgroundImageIndex.indexOf(props.state.data.weather_state_abbr)]} alt="" />
+                    width: "130px",
+                    height: 'intrinsic'
+                }} 
+                src = {imgurl}
+                 alt="" />
 
                 
             </div>
