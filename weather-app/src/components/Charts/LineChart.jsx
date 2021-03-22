@@ -36,7 +36,7 @@ export default function LineChart(props) {
           ],
         },
         options: {
-          aspectRatio: 16/11.9,
+          aspectRatio: 16 / 11.9,
           responsive: true,
           responsiveAnimationDuration: 2000,
           plugins: {

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js";
 import "chartjs-plugin-colorschemes";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from "react-responsive";
 
 export default function TemChart(props) {
-  const isTabletOrMobile = useMediaQuery({ query: '(min-width: 1080px)' })
+  const isTabletOrMobile = useMediaQuery({ query: "(min-width: 1080px)" });
 
   useEffect(() => {
     if (props.the_temp.length > 0) {
@@ -12,14 +12,12 @@ export default function TemChart(props) {
       const ctx = document.createElement("canvas");
       // ctx.style.backgroundColor = '#FDF5E6';
 
-
       if (isTabletOrMobile) {
-        // ctx.height = 250; 
+        // ctx.height = 250;
       } else {
-        ctx.height = 250; 
+        ctx.height = 250;
       }
 
-      
       new Chart(ctx, {
         type: "bar",
         data: {
@@ -46,7 +44,7 @@ export default function TemChart(props) {
           ],
         },
         options: {
-          aspectRatio: 16/7.5,
+          aspectRatio: 16 / 7.5,
           responsive: true,
           responsiveAnimationDuration: 2000,
           plugins: {
