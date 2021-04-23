@@ -15,15 +15,15 @@ Weather  App using React js and base on OpenWeatherMap API
 * chartjs-plugin-colorschemes v0.4.0
 * fontawesome v5.0.7
 * bootstrap v4.0.0
-* jquery v3.2.1
 * ajax v1.12.9
+* OpenWeatherMap API
 
 ### Screenshot 
  
 ![weather](weatherapp.PNG) 
 
 ## Developed By
-[Areeg Fahad](https://github.com/AREEG94FAHAD) 
 [Othman Shareef](https://github.com/Othmanosx)
+[Areeg Fahad](https://github.com/AREEG94FAHAD) 
 [Abdulazeez Alabbasi](https://github.com/Saganism)
 
