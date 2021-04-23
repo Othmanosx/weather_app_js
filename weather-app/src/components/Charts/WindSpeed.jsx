@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import Chart from "chart.js";
-import "chartjs-plugin-colorschemes";
+import React, { useEffect } from "react"
+import Chart from "chart.js"
+import "chartjs-plugin-colorschemes"
 
 export default function WindSpeed(props) {
   useEffect(() => {
     if (props.wind_speed.length > 0) {
-      document.querySelector(".WindSpeed").innerHTML = "";
-      const ctx = document.createElement("canvas");
+      document.querySelector(".WindSpeed").innerHTML = ""
+      const ctx = document.createElement("canvas")
       // ctx.style.backgroundColor = '#FDF5E6';
       // ctx.height = 250;
 
@@ -42,14 +42,14 @@ export default function WindSpeed(props) {
             ],
           },
         },
-      });
+      })
 
-      document.getElementsByClassName("WindSpeed")[0].appendChild(ctx);
+      document.getElementsByClassName("WindSpeed")[0].appendChild(ctx)
     }
-  }, [props.wind_speed, props.date]);
+  }, [props.wind_speed, props.date])
   return (
     <div className="WindSpeed">
       <canvas id="WindSpeed"></canvas>
     </div>
-  );
+  )
 }

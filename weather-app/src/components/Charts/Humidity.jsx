@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import Chart from "chart.js";
-import "chartjs-plugin-colorschemes";
+import React, { useEffect } from "react"
+import Chart from "chart.js"
+import "chartjs-plugin-colorschemes"
 
 export default function Humidity(props) {
   useEffect(() => {
     if (props.humidity.length > 0) {
-      document.querySelector(".Humidity").innerHTML = "";
-      const ctx = document.createElement("canvas");
+      document.querySelector(".Humidity").innerHTML = ""
+      const ctx = document.createElement("canvas")
       // ctx.style.backgroundColor = '#FDF5E6';
       // ctx.height = 250;
 
@@ -42,14 +42,14 @@ export default function Humidity(props) {
             ],
           },
         },
-      });
+      })
 
-      document.getElementsByClassName("Humidity")[0].appendChild(ctx);
+      document.getElementsByClassName("Humidity")[0].appendChild(ctx)
     }
-  }, [props.humidity, props.date]);
+  }, [props.humidity, props.date])
   return (
     <div className="Humidity">
       <canvas id="Humidity"></canvas>
     </div>
-  );
+  )
 }

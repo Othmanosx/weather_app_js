@@ -1,13 +1,13 @@
-import './App.css';
-import Container from './components/container'
+import "./App.css"
+import Container from "./components/container"
 
 function App() {
   return (
     <div className="App">
-      <br/>
+      <br />
       <Container />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,6 +1,4 @@
-
-div.widget
-{
+div.widget {
   position: relative;
   width: 455px;
   height: 200px;
@@ -12,15 +10,13 @@ div.widget
   box-shadow: 0px 31px 35px -26px #080c21;
 }
 
-div.date
-{
+div.date {
   font-size: 14px;
   font-weight: bold;
   color: #6f7886;
 }
 
-div.city
-{
+div.city {
   font-size: 21px;
   font-weight: bold;
   text-transform: uppercase;
@@ -28,15 +24,13 @@ div.city
   color: #6f7886;
 }
 
-div.temp
-{
+div.temp {
   font-size: 74.9px;
   color: #6f7886;
   font-weight: 200;
 }
 
-div.panel
-{
+div.panel {
   /* display: inline-block; */
   color: #6f7886;
 }
@@ -49,7 +43,3 @@ div.panel
   margin-top: 35px;
   padding-left: 10%;
 } */
-
-
-
-

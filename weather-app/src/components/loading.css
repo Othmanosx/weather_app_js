@@ -1,10 +1,9 @@
-.loading{
-    text-align: center;
-    margin-top: 300px;
+.loading {
+  text-align: center;
+  margin-top: 300px;
 }
 
 .icon {
-
   display: inline-block;
   width: 12em;
   height: 10em;
@@ -22,16 +21,13 @@
   margin: -1.84375em;
   background: white;
   border-radius: 50%;
-  box-shadow:
-    -2.1875em 0.6875em 0 -0.6875em,
-    2.0625em 0.9375em 0 -0.9375em,
-    0 0 0 0.375em #000,
-    -2.1875em 0.6875em 0 -0.3125em #000,
+  box-shadow: -2.1875em 0.6875em 0 -0.6875em, 2.0625em 0.9375em 0 -0.9375em,
+    0 0 0 0.375em #000, -2.1875em 0.6875em 0 -0.3125em #000,
     2.0625em 0.9375em 0 -0.5625em #000;
 }
 
 .cloud:after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: -0.5em;
@@ -45,18 +41,17 @@
 .cloud:nth-child(2) {
   z-index: 0;
   background: #000;
-  box-shadow:
-    -2.1875em 0.6875em 0 -0.6875em #000,
-    2.0625em 0.9375em 0 -0.9375em #000,
-    0 0 0 0.375em #000,
-    -2.1875em 0.6875em 0 -0.3125em #000,
-    2.0625em 0.9375em 0 -0.5625em #000;
+  box-shadow: -2.1875em 0.6875em 0 -0.6875em #000,
+    2.0625em 0.9375em 0 -0.9375em #000, 0 0 0 0.375em #000,
+    -2.1875em 0.6875em 0 -0.3125em #000, 2.0625em 0.9375em 0 -0.5625em #000;
   opacity: 0.3;
   transform: scale(0.5) translate(6em, -3em);
   animation: cloud 4s linear infinite;
 }
 
-.cloud:nth-child(2):after { background: #000; }
+.cloud:nth-child(2):after {
+  background: #000;
+}
 
 .sun {
   position: absolute;
@@ -86,7 +81,7 @@
 
 .rays:before,
 .rays:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0em;
   left: 0em;
@@ -106,7 +101,7 @@
   margin: -2em 1em;
 }
 
-.rain{
+.rain {
   position: absolute;
   z-index: 2;
   top: 50%;
@@ -118,7 +113,7 @@
 }
 
 .rain:after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: 2;
   top: 50%;
@@ -128,23 +123,28 @@
   margin: -1em 0 0 -0.25em;
   background: #0cf;
   border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
-  box-shadow:
-    0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
-    -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
-    -1.375em -0.125em 0 rgba(255,255,255,0.2);
+  box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
+    -0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
+    -1.375em -0.125em 0 rgba(255, 255, 255, 0.2);
   transform: rotate(-28deg);
   animation: rain 3s linear infinite;
 }
 
-/* Animations */ 
+/* Animations */
 
 @keyframes spin {
-  100% { transform: rotate(360deg); }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes cloud {
-  0% { opacity: 0; }
-  50% { opacity: 0.3; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
   100% {
     opacity: 0;
     transform: scale(0.5) translate(-200%, -3em);
@@ -154,28 +154,24 @@
 @keyframes rain {
   0% {
     background: #0cf;
-    box-shadow:
-      0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
-      -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+    box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
+      -0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
       -1.375em -0.125em 0 #0cf;
   }
   25% {
-    box-shadow:
-      0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+    box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
       -0.875em 1.125em 0 -0.125em #0cf,
-      -1.375em -0.125em 0 rgba(255,255,255,0.2);
+      -1.375em -0.125em 0 rgba(255, 255, 255, 0.2);
   }
   50% {
-    background: rgba(255,255,255,0.3);
-    box-shadow:
-      0.625em 0.875em 0 -0.125em #0cf,
-      -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
-      -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0.625em 0.875em 0 -0.125em #0cf,
+      -0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
+      -1.375em -0.125em 0 rgba(255, 255, 255, 0.2);
   }
   100% {
-    box-shadow:
-      0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
-      -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+    box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
+      -0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
       -1.375em -0.125em 0 #0cf;
   }
 }

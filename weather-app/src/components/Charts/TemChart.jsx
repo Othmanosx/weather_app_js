@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import Chart from "chart.js";
-import "chartjs-plugin-colorschemes";
-import { useMediaQuery } from "react-responsive";
+import React, { useEffect } from "react"
+import Chart from "chart.js"
+import "chartjs-plugin-colorschemes"
+import { useMediaQuery } from "react-responsive"
 
 export default function TemChart(props) {
-  const isTabletOrMobile = useMediaQuery({ query: "(min-width: 1080px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(min-width: 1080px)" })
 
   useEffect(() => {
     if (props.the_temp.length > 0) {
-      document.querySelector(".TemChart").innerHTML = "";
-      const ctx = document.createElement("canvas");
+      document.querySelector(".TemChart").innerHTML = ""
+      const ctx = document.createElement("canvas")
       // ctx.style.backgroundColor = '#FDF5E6';
 
       if (isTabletOrMobile) {
         // ctx.height = 250;
       } else {
-        ctx.height = 250;
+        ctx.height = 250
       }
 
       new Chart(ctx, {
@@ -62,14 +62,14 @@ export default function TemChart(props) {
             ],
           },
         },
-      });
+      })
 
-      document.getElementsByClassName("TemChart")[0].appendChild(ctx);
+      document.getElementsByClassName("TemChart")[0].appendChild(ctx)
     }
-  }, [props.min_temp, props.the_temp, props.max_temp, props.date]);
+  }, [props.min_temp, props.the_temp, props.max_temp, props.date])
   return (
     <div className="TemChart">
       <canvas id="TemChart"></canvas>
     </div>
-  );
+  )
 }

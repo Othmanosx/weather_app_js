@@ -1,19 +1,19 @@
-import React from "react";
-import Search from "./search";
-import "./today.css";
-import sn from "./wallpapers/snow.svg";
-import sl from "./wallpapers/sleet.svg";
-import h from "./wallpapers/hail.svg";
-import t from "./wallpapers/thunderstorm.svg";
-import hr from "./wallpapers/heavyrain.svg";
-import lr from "./wallpapers/lightrain.svg";
-import s from "./wallpapers/showers.svg";
-import hc from "./wallpapers/heavycloud.svg";
-import lc from "./wallpapers/lightcloud.svg";
-import c from "./wallpapers/clear.svg";
+import React from "react"
+import Search from "./search"
+import "./today.css"
+import sn from "./wallpapers/snow.svg"
+import sl from "./wallpapers/sleet.svg"
+import h from "./wallpapers/hail.svg"
+import t from "./wallpapers/thunderstorm.svg"
+import hr from "./wallpapers/heavyrain.svg"
+import lr from "./wallpapers/lightrain.svg"
+import s from "./wallpapers/showers.svg"
+import hc from "./wallpapers/heavycloud.svg"
+import lc from "./wallpapers/lightcloud.svg"
+import c from "./wallpapers/clear.svg"
 
 export default function today(props) {
-  let imgurl = "";
+  let imgurl = ""
   const backgroundImage = [
     {
       name: "snow",
@@ -67,18 +67,18 @@ export default function today(props) {
       name: "clear",
       url: c,
     },
-  ];
+  ]
   if (props.state.data.weather) {
     backgroundImage.map((item) =>
       props.state.data.weather[0].description.includes(item.name)
         ? (imgurl = item.url)
         : null
-    );
+    )
   }
 
   function convertTime(date) {
-    const event = new Date(date * 1000);
-    return event.toLocaleTimeString();
+    const event = new Date(date * 1000)
+    return event.toLocaleTimeString()
   }
   return (
     <div>
@@ -127,5 +127,5 @@ export default function today(props) {
         />
       </div>
     </div>
-  );
+  )
 }
