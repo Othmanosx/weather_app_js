@@ -1,21 +1,27 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 
 export default class search extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       cityName: "",
-    };
+    }
   }
 
   onChange = (e) => {
-    this.setState({ cityName: e.target.value });
-  };
+    this.setState({ cityName: e.target.value })
+  }
   onClick = (e) => {
-    this.props.onClick(this.state.cityName);
-    this.setState({ cityName: "" });
-  };
+    this.props.onClick(this.state.cityName)
+    this.setState({ cityName: "" })
+  }
+  onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      this.props.onClick(this.state.cityName)
+      this.setState({ cityName: "" })
+    }
+  }
 
   render() {
     return (
@@ -26,6 +32,7 @@ export default class search extends Component {
               <div className="input">
                 <input
                   onChange={this.onChange}
+                  onKeyDown={this.onKeyDown}
                   type="text"
                   name="search"
                   value={this.state.cityName}
@@ -40,6 +47,6 @@ export default class search extends Component {
           </li>
         </ul>
       </div>
-    );
+    )
   }
 }
